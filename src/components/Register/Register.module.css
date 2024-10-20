@@ -91,7 +91,7 @@ form > div > img {
     font-size: 33px;
     line-height: 45px;
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 .errorMsg {
     color: red;
@@ -104,3 +104,4 @@ form > div > img {
     color: green;
     font-size: 18px;
 }  
+

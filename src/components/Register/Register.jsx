@@ -9,7 +9,7 @@ import passwordImg from "../../assets/Icons/password.png";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { register } from "../../Service/Auth";
 function Register() {
   const navigate = useNavigate();
   const [visiblePass, setVisiblePass] = useState({
@@ -24,7 +24,6 @@ function Register() {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
-  
 
   const handleTogglePassword = (fieldName) => {
     setVisiblePass((prevState) => ({
@@ -50,8 +49,6 @@ function Register() {
       errors.name = "Name is required.";
     } else if (!/^[A-Za-z]/.test(formData.name)) {
       errors.name = "Name must be start with a letter.";
-    }else{
-      delete errors.name
     }
 
     if (!formData.email) {
@@ -70,49 +67,73 @@ function Register() {
     }
     if (!formData.confirmPassword) {
       errors.confirmPassword = "Please confirm your password.";
-    } else if (
-      formData.password !== formData.confirmPassword
-    ) {
+    } else if (formData.password !== formData.confirmPassword) {
       errors.confirmPassword = "Please enter correct password.";
     }
     return errors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    const errors = validate();
-    console.log(errors);
-    
-    if (Object.keys(errors).length === 0) {
-      setErrors(errors);
 
-      console.log("Form submitted successfully!", formData);
-      toast.success(" User registered successfully!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+    const errors = validate();
+
+    if (Object.keys(errors).length === 0) {
+      setErrors({});
+
+      const response = await register(formData);
+      if (response.status === 400) {
+        toast.error(response.error.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else if (response.status === 201) {
+        console.log(response);
+        toast.success(response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else if (response.status === 500) {
+        toast.error("An unknown error occurred", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      } else if (response.status === 404) {
+        toast.error("Url is incorrect", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      }
     } else {
-      console.log(formData);
       setErrors(errors);
-      toast.error(" THere was a error!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
     }
   };
 
@@ -136,8 +157,8 @@ function Register() {
           <img src={image1} alt="here is a image" />
         </div>
         <div>
-          <h1>Welcome aboard my friend</h1>
-          <p>just a couple of clicks and we start</p>
+          <h1 className="heading">Welcome aboard my friend</h1>
+          <p className="paragraph">just a couple of clicks and we start</p>
         </div>
       </div>
       <div className={`open-sans ${style.rightSide}`}>
@@ -209,7 +230,6 @@ function Register() {
             <p className={style.errorMsg}>{errors.confirmPassword}</p>
           )}
           <button
-            // disabled={true}
             className={`primary-btn opacity06 mrtop2andHalfrem cp ${style.btnCss} ${style.regbtn}`}
             type="submit"
           >

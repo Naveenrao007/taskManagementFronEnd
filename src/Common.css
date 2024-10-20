@@ -1,9 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 #root {
   --primaryClr: #fffffff;
@@ -34,4 +34,28 @@
 }
 .opacity06 {
   opacity: 0.6;
+}
+
+.heading {
+  color: #ffffff;
+  font-size: 30px;
+  line-height: 60px;
+  font-weight: 600;
+}
+.paragraph {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 40px;
+  font-weight: 400;
+}
+.flex {
+  display: flex;
+}
+.flexdr {
+  display: flex;
+  flex-direction: row;
+}
+.flexdc {
+  display: flex;
+  flex-direction: column;
 }
