@@ -1,55 +1,89 @@
 import React from "react";
+import style from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
-import codeSabdbox from "../../assets/Icons/codesandbox.png";
+import codeSandbox from "../../assets/Icons/codesandbox.png";
 import database from "../../assets/Icons/database.png";
 import layout from "../../assets/Icons/layout.png";
 import settings from "../../assets/Icons/settings.png";
-import Logout from "../../assets/Icons/Logout.png";
-function Navbar() {
+import logoutIcon from "../../assets/Icons/Logout.png";
+import Analytics from "../Analytics/Analytics";
+import Setting from "../Settings/Setting";
+import { useState } from "react";
+import LogoutModal from "../Logout/Logout";
+function Navbar({  }) {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    window.location.href= "/login"
+    console.log("User logged out");
+    setShowModal(false); 
+  };
+
+
   return (
-    <nav>
-      <ul>
-        <li className="flexdr">
+    <nav className={`poppins ${style.container}`}>
+      <ul className={`widthFull`}>
+        <li className="flexdr pdleft2vw alignItmC mrtop1rem gap1rem">
           <div>
-            <img src={codeSabdbox} alt="img" />
+            <img src={codeSandbox} alt="img" />
           </div>
           <div>
-            <h2>Pro Manage</h2>
+            <h2 className={`${style.proManage}`}>Pro Manage</h2>
           </div>
         </li>
-        <li>
-          <NavLink to="/board" className="flexdr">
-            <div >
-              <img src={layout} alt="layoutImg" />
+        <li className="mrtop2rem">
+          <NavLink to="/dashboard/board" className={({ isActive }) => isActive ? `flexdr tabsPadding ${style.navLinkActive}` : `flexdr tabsPadding ${style.navLink}`}>
+            <div className="flexdr pdleft2vw alignItmC gap1rem">
+              <div className="flex">
+                <img src={layout} alt="layoutImg" />
+              </div>
+              <div>Board</div>
             </div>
-            <div>Board</div>
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/analytics" className="flexdr">
-            <div >
-              <img src={database} alt="databaseImg" />
+        <li className="mrtop2rem">
+          <NavLink to="/dashboard/analytics" className={({ isActive }) => isActive ? `flexdr tabsPadding ${style.navLinkActive}` : `flexdr tabsPadding ${style.navLink}`}>
+            <div className="flexdr pdleft2vw alignItmC gap1rem">
+              <div className="flex">
+                <img src={database} alt="databaseImg" />
+              </div>
+              <div>
+                Analytics
+              </div>
             </div>
-            <div>Analytics</div>
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/setting" className="flexdr" >
-            <div >
-              <img src={settings} alt="databaseImg" />
+        <li className="mrtop2rem">
+          <NavLink to="/dashboard/settings" className={({ isActive }) => isActive ? `flexdr tabsPadding ${style.navLinkActive}` : `flexdr tabsPadding ${style.navLink}`}>
+            <div className="flexdr pdleft2vw alignItmC gap1rem">
+              <div className="flex">
+                <img src={settings} alt="settingsImg" />
+              </div>
+              <div>
+                Settings
+              </div>
             </div>
-            <div>Setting</div>
           </NavLink>
         </li>
       </ul>
-      <div>
-        <NavLink to="/logout" className="flexdr" >
-          <div >
-            <img src={Logout} alt="logoutImg" />
+      <ul className="widthFull">
+        <li className={`mrtop2rem ${style.logoutdiv}`}>
+          <div className="flexdr cp tabsPadding atag logout-btn" onClick={() => setShowModal(true)} >
+            <div className="flexdr pdleft2vw alignItmC gap1rem">
+              <div className="flex">
+                <img src={logoutIcon} alt="logoutImg" />
+              </div>
+              <div className="redcolor">Logout</div>
+            </div>
           </div>
-          <div>Logout</div>
-        </NavLink>
-      </div>
+        </li>
+      </ul>
+      <LogoutModal
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        handleLogout={handleLogout}
+      />
     </nav>
   );
 }

@@ -1,0 +1,50 @@
+.modal_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.modal_content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal_buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn_cancel {
+  background-color: #ccc;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn_logout {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover,
+.btn-logout:hover {
+  opacity: 0.8;
+}

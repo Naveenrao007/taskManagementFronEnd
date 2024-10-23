@@ -91,7 +91,8 @@ function Login() {
           transition: Bounce,
         });
         setTimeout(() => {
-          navigate("/dashboard");
+          localStorage.setItem("token", response.data.token);
+          navigate("/dashboard/board");
         }, 600);
       } else if (response.status === 500) {
         toast.error("An unknown error occurred", {
