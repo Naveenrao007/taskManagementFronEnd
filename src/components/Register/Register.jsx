@@ -98,7 +98,7 @@ function Register() {
         console.log(response);
         toast.success(response.data.message, {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -107,6 +107,9 @@ function Register() {
           theme: "light",
           transition: Bounce,
         });
+        setTimeout(() => {
+          navigate("/login");
+        }, 2100);
       } else if (response.status === 500) {
         toast.error("An unknown error occurred", {
           position: "top-right",
