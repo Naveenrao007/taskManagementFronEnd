@@ -24,7 +24,7 @@ function Dashboard() {
       <div className="width18vw hightfull">
         <Navbar OnLogout={() => setIsModalOpen(true)} />
       </div>
-      <div className="width82vw">
+      <div className="width82vw ">
         
           <Outlet />
       </div>

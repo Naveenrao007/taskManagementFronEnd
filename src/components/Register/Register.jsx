@@ -85,7 +85,7 @@ function Register() {
       if (response.status === 400) {
         toast.error(response.error.message, {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1400,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -94,6 +94,9 @@ function Register() {
           theme: "light",
           transition: Bounce,
         });
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 1900);
       } else if (response.status === 201) {
         console.log(response);
         toast.success(response.data.message, {
@@ -111,7 +114,7 @@ function Register() {
           navigate("/login");
         }, 2100);
       } else if (response.status === 500) {
-        toast.error("An unknown error occurred", {
+        toast.error("Internal server error", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -233,7 +236,7 @@ function Register() {
             <p className={style.errorMsg}>{errors.confirmPassword}</p>
           )}
           <button
-            className={`primary-btn opacity06 mrtop2andHalfrem cp ${style.btnCss} ${style.regbtn}`}
+            className={`primary-btn  mrtop2andHalfrem cp ${style.btnCss} ${style.regbtn}`}
             type="submit"
           >
             Register

@@ -60,16 +60,17 @@ function Login() {
     e.preventDefault();
 
     const errors = validate();
-    console.log(errors);
 
     if (Object.keys(errors).length === 0) {
       setErrors({});
 
       const response = await login(formData);
+      console.log(response);
+      
       if (response.status === 400) {
         toast.error(response.error.message, {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1400,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -78,6 +79,9 @@ function Login() {
           theme: "light",
           transition: Bounce,
         });
+        // setTimeout(() => {
+        //   window.location.href = "/login";
+        // }, 1900);
       } else if (response.status === 200) {
         toast.success(response.data.message, {
           position: "top-right",
@@ -95,7 +99,7 @@ function Login() {
           navigate("/dashboard/board");
         }, 600);
       } else if (response.status === 500) {
-        toast.error("An unknown error occurred", {
+        toast.error("Internal server error", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -185,7 +189,7 @@ function Login() {
           )}
 
           <button
-            className={`primary-btn opacity06 mrtop2andHalfrem cp ${style.btnCss} ${style.regbtn}`}
+            className={`primary-btn  mrtop2andHalfrem cp ${style.btnCss} ${style.regbtn}`}
             type="submit"
           >
             Login

@@ -1,39 +1,85 @@
-
 .gridcontainer {
-    display: grid;
-    width: 100%;
-    height: 84vh;
-    overflow-y: hidden;
-    grid-template-columns: 25% 25% 25% 25%;
-    gap: 1.5rem;
-    overflow-x: scroll;
-    padding: 0.5rem;
-  }
-  .gridcontent {
-    background: #eef2f5;
-    padding: 18px 10px;
-    border-radius: 10px;
-    height: 100%;
-    overflow: hidden;
-  }
-  .boardheader {
-    padding: 0px 10px;
-    margin-top: 1rem;
-  }
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #f0f0f0;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: #9cb7c5;
-    border-radius: 10px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #86aabd;
-  }
+  display: grid;
+  width: 82vw;
+  font-family: var(--poppins);
+
+  height: 84vh;
+  overflow-y: hidden;
+  grid-template-columns: 18rem 18rem 18rem 18rem;
+  gap: 1.5rem;
+  overflow-x: scroll;
+  padding: 0.5rem 2rem;
+}
+.gridcontent {
+  background: #eef2f5;
+  padding: 18px 10px;
+  border-radius: 10px;
+  height: 100%;
+  overflow: hidden;
+}
+.boardheader {
+  padding: 0rem 2rem;
+  margin-top: 1rem;
+  font-family: var(--poppins);
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9cb7c5;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #86aabd;
+}
+.date {
+  color: #707070;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+.name {
+  color: #000000;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 33px;
+}
+
+.heading {
+  font-size: 29px;
+  font-weight: 500;
+  line-height: 43.5px;
+  text-align: left;
+}
+
+.dropdownContainer {
+  font-family: var(--poppins);
+  position: absolute;
+  right: 2.5vw;
+  background-color: #ffffff;
+  list-style: none;
+  z-index: 2;
+  border-radius: 12px;
+  box-shadow: 0px 2px 22px 0px #7e7a7a40;
+}
+
+.listOption {
+  list-style: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  align-items: center;
+  color: #000000;
+  margin-bottom: 0.5rem;
+}
+
+.listOption:hover {
+  background-color: #cfcbcb;
+}
