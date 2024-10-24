@@ -196,7 +196,7 @@ function Login() {
           </button>
         </form>
         <div className={style.m_auto}>
-          <p className={style.text}> dont have an Account ?</p>
+          <p className={style.text}> don't have an Account ?</p>
           <button
             className={`primary-btn  cp  ${style.btnCssLogin}`}
             onClick={() => navigate("/register")}

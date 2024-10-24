@@ -39,6 +39,15 @@ function Board() {
     };
   }, [isOpen]);
 
+  // this code for add user model
+
+  const [showModal, setShowModal]  = useState(false)
+  const handleAddUser = (e)=>{
+    console.log(e.target.value);
+    
+  }
+
+
   return (
     <div>
       <header className={`${style.boardheader}`}>
@@ -49,7 +58,7 @@ function Board() {
         <div className="flexdr jcsb">
           <div className="flexdr alignItmC gap1rem">
             <div className={`${style.heading}`}>Board</div>
-            <div className="flexdr gap10px">
+            <div className="flexdr gap10px" onClick={() => setShowModal(true)}>
               <div>
                 <img src={Peopleimg} alt="" />
               </div>
@@ -66,9 +75,33 @@ function Board() {
             {isOpen && (
               <div className={`${style.dropdownContainer}`} ref={dropdownRef}>
                 <ul>
-                  <li className={`cp ${style.listOption}`} onClick={() => { setTimePeriod("today"); setOpen(false); }}>Today</li>
-                  <li className={`cp ${style.listOption}`} onClick={() => { setTimePeriod("thisweek"); setOpen(false); }}>This week</li>
-                  <li className={`cp ${style.listOption}`} onClick={() => { setTimePeriod("thismonth"); setOpen(false); }}>This month</li>
+                  <li
+                    className={`cp ${style.listOption}`}
+                    onClick={() => {
+                      setTimePeriod("today");
+                      setOpen(false);
+                    }}
+                  >
+                    Today
+                  </li>
+                  <li
+                    className={`cp ${style.listOption}`}
+                    onClick={() => {
+                      setTimePeriod("thisweek");
+                      setOpen(false);
+                    }}
+                  >
+                    This week
+                  </li>
+                  <li
+                    className={`cp ${style.listOption}`}
+                    onClick={() => {
+                      setTimePeriod("thismonth");
+                      setOpen(false);
+                    }}
+                  >
+                    This month
+                  </li>
                 </ul>
               </div>
             )}
@@ -89,6 +122,16 @@ function Board() {
           <Done />
         </div>
       </div>
+
+      <AddUser
+        isOpen={showModal}
+        onRequestClose={() => setShowModal(false)}
+        handleAddUser={handleAddUser}
+      />
+      <NewTask
+        isOpenNewTask={showModal}
+        onRequestClose={() => setisOpenNewTask(false)}
+        handleNewTask={handleNewTask}/>
     </div>
   );
 }

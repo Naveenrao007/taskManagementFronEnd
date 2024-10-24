@@ -1,0 +1,91 @@
+.modal_overlay {
+    background-color: rgba(0, 0, 0, 0.65);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .modal_content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    outline: none;
+  }
+  .heading_text {
+    color: #000000;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 19px;
+    text-align: start;
+    padding-left: 1rem;
+    margin-bottom: 2rem;
+  }
+  .modal_buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+  }
+  
+  .btn_cancel {
+    background-color: #ffffff;
+    color: red;
+    border: 1px solid red;
+    width: 50%;
+  }
+  
+  .btn_logout {
+    background-color: #17a2b8;
+    color: #ffffff;
+    border: none;
+    width: 50%;
+  }
+  
+  .btn_fonts {
+    text-decoration: none;
+    padding: 0.4rem 1rem;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+    border-radius: 11px;
+    cursor: pointer;
+  }
+  .inputfield {
+    border: 1px solid #767575;
+    border-radius: 10px;
+    width: 98%;
+    padding: 0.5rem;
+  }
+  
+  .suggestionContainer {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .optiondiv {
+    font-family: var(--poppins);
+    margin: 1rem 1.5rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    padding: 0.3rem 0.5rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .optiondiv:hover {
+    background-color: #c2baba;
+  }
+  .suggestionContainer > ul {
+  }
+  

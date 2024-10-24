@@ -98,7 +98,6 @@ function Navbar() {
         </li>
       </ul>
 
-     
       <LogoutModal
         isOpen={showModal}
         onRequestClose={() => setShowModal(false)}
