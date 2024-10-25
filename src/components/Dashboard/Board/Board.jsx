@@ -7,7 +7,7 @@ import Peopleimg from "../../../assets/Icons/peoples.png";
 import Dropdownimg from "../../../assets/Icons/dropdown.png";
 import Done from "../Done/Done";
 import getTodayDate from "../../../Service/Calander";
-
+import AddUser from "../../Models/AddUser/AddUser"
 function Board() {
   const [isOpen, setOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState("today");
@@ -41,7 +41,7 @@ function Board() {
 
   // this code for add user model
 
-  const [showModal, setShowModal]  = useState(false)
+  const [isOpenAddUserModal, setisOpenAddUserModal]  = useState(false)
   const handleAddUser = (e)=>{
     console.log(e.target.value);
     
@@ -58,7 +58,7 @@ function Board() {
         <div className="flexdr jcsb">
           <div className="flexdr alignItmC gap1rem">
             <div className={`${style.heading}`}>Board</div>
-            <div className="flexdr gap10px" onClick={() => setShowModal(true)}>
+            <div className="flexdr gap10px" onClick={() => setisOpenAddUserModal(true)}>
               <div>
                 <img src={Peopleimg} alt="" />
               </div>
@@ -124,14 +124,14 @@ function Board() {
       </div>
 
       <AddUser
-        isOpen={showModal}
-        onRequestClose={() => setShowModal(false)}
+        isOpenAddUserModal={isOpenAddUserModal}
+        onRequestClose={() => setisOpenAddUserModal(false)}
         handleAddUser={handleAddUser}
       />
-      <NewTask
+      {/* <NewTask
         isOpenNewTask={showModal}
         onRequestClose={() => setisOpenNewTask(false)}
-        handleNewTask={handleNewTask}/>
+        handleNewTask={handleNewTask}/> */}
     </div>
   );
 }

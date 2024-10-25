@@ -199,6 +199,7 @@ function Register() {
             <input
               type={visiblePass.password.type}
               name="password"
+              autoComplete={false}
               onChange={handleInputChange}
               value={formData.password}
               placeholder="Password"

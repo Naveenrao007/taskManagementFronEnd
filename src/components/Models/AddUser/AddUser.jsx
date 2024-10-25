@@ -2,22 +2,80 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import style from "./AddUser.module.css";
 import { allUsers } from "../../../Service/GetAllUser";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import AddUserToBoard from "../../../Service/AddUserToBoard"
 Modal.setAppElement("#root");
 
-const AddUser = ({ isOpen, onRequestClose, handleAddUser }) => {
+const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
   const [alluserData, setAllUserData] = useState([]);
   const [userData, setUserData] = useState([]);
   const [searchChar, setSearchChar] = useState("");
-  const [selectedUser, setselectedUser] = useState("");
-  const handleuserdata = async () => {
+  const [selectedUser, setSelectedUser] = useState("");
+
+  const handleUserData = async () => {
     const response = await allUsers();
-    if (response) {
-      const data = response.data.users;
-      setAllUserData(data);
-      setUserData(data);
+    console.log(response);
+
+    if (response.status === 400) {
+      toast.error(response.error.message, {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+
+      setTimeout(() => {
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      }, 2000);
+    } else if (response.status === 200) {
+      toast.success(response.data.message, {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+
+      setAllUserData(response.data.users);
+      setUserData(response.data.users);
+    } else if (response.status === 500) {
+      toast.error("Internal server error", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    } else if (response.status === 404) {
+      toast.error("Url is incorrect", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
     }
   };
-  const handleuserSearch = async (e) => {
+
+  const handleUserSearch = (e) => {
     const searchChar = e.target.value;
     setSearchChar(searchChar);
 
@@ -30,61 +88,88 @@ const AddUser = ({ isOpen, onRequestClose, handleAddUser }) => {
       setUserData(filteredUsers);
     }
   };
-  return (
-    <Modal
-      isOpenNew={isOpen}
-      onRequestClose={onRequestClose}
-      contentLabel="Logout Confirmation"
-      className={style.modal_content}
-      overlayClassName={style.modal_overlay}
-    >
-      <h2 className={`open-sans poppins ${style.heading_text}`}>
-        Add people to the board
-      </h2>
-      <div className="poppins">
-        <div>
-          <input
-            type="text"
-            placeholder="Enter your Email "
-            onClick={handleuserdata}
-            value={selectedUser}
-            onChange={handleuserSearch}
-            className={style.inputfield}
-          />
-        </div>
 
-        <div className={style.suggestionContainer}>
-          <ul>
-            {userData.map((item, index) => {
-              return (
-                <div
-                  className={`${style.optiondiv}`}
-                  key={index}
-                  onClick={() => setselectedUser(item.email)}
-                >
-                  <li>{item.email}</li>
-                  <li id={item.name}>ADD</li>
-                </div>
-              );
-            })}
-          </ul>
+  const handleAddUserToBoard = async (user) => {
+
+    const res = await AddUserToBoard(user)
+    
+  };
+  const handleSelectUser = (email) => {
+    setSelectedUser(email);
+    setSearchChar(email); // Populate input with selected email
+    setUserData(alluserData); // Optionally reset the user data if needed
+  };
+
+  return (
+    <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
+      <Modal
+        isOpen={isOpenAddUserModal}
+        onRequestClose={onRequestClose}
+        contentLabel="Add people to the board"
+        className={style.modal_content}
+        overlayClassName={style.modal_overlay}
+      >
+        <h2 className={`open-sans poppins ${style.heading_text}`}>
+          Add people to the board
+        </h2>
+        <div className="poppins">
+          <div>
+            <input
+              type="text"
+              placeholder="Enter your Email"
+              onClick={handleUserData}
+              value={searchChar}
+              onChange={handleUserSearch}
+              className={style.inputfield}
+            />
+          </div>
+
+          <div className={style.suggestionContainer}>
+            {isOpenAddUserModal && (
+              <ul>
+                {userData.map((item, index) => (
+                  <div
+                    className={style.optiondiv}
+                    key={index}
+                    onClick={() => handleSelectUser(item.email)} // Use the new handler
+                  >
+                    <li>{item.email}</li>
+                    <li id={item.name}>ADD</li>
+                  </div>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-      </div>
-      <div className={style.modal_buttons}>
-        <button
-          onClick={onRequestClose}
-          className={` poppins ${style.btn_cancel} ${style.btn_fonts}`}
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleAddUser}
-          className={` poppins ${style.btn_logout} ${style.btn_fonts}`}
-        >
-          Add Email
-        </button>
-      </div>
-    </Modal>
+        <div className={style.modal_buttons}>
+          <button
+            onClick={onRequestClose}
+            className={`poppins ${style.btn_cancel} ${style.btn_fonts}`}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => handleAddUserToBoard(selectedUser)}
+            className={`poppins ${style.btn_logout} ${style.btn_fonts}`}
+          >
+            Add Email
+          </button>
+        </div>
+      </Modal>
+    </div>
   );
 };
 

@@ -8,7 +8,6 @@ import Loading from "../Loading/Loading";
 import getBoardData from "../../Service/BoardData"
 function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
-  const loadAllJobs = () => {};
   useEffect(() => {
     getBoardData().then((res) => {
       console.log(res);
