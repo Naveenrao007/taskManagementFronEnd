@@ -7,13 +7,17 @@ import { useState } from "react";
 import Loading from "../Loading/Loading";
 import getBoardData from "../../Service/BoardData"
 function Dashboard() {
+  const[dashboardData, setdashboardData] = useState([{}])
   const [isLoading, setIsLoading] = useState(true);
+  const  getdata = async()=>{
+    const data = await getBoardData()
+    console.log(data);
+    setIsLoading(false)
+    
+  }
   useEffect(() => {
-    getBoardData().then((res) => {
-      console.log(res);
 
-      setIsLoading(false);
-    });
+    getdata()
   }, []);
 
   return isLoading ? (
@@ -23,7 +27,7 @@ function Dashboard() {
       <div className="width18vw hightfull">
         <Navbar OnLogout={() => setIsModalOpen(true)} />
       </div>
-      <div className="width82vw ">
+      <div className="width82vw">
         
           <Outlet />
       </div>
