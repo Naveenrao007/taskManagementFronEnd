@@ -154,7 +154,7 @@ function Login() {
       </div>
       <div className={`open-sans ${style.rightSide}`}>
         <h1 className={` ${style.m_auto} ${style.regheading}`}>Login</h1>
-        <form onSubmit={handleSubmit}>
+        <form className={`${style.Loginform}`} onSubmit={handleSubmit}>
           <div>
             <img src={emailImg} alt="email png" />
             <input

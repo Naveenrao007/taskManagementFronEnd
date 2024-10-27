@@ -7,7 +7,7 @@ import Peopleimg from "../../../assets/Icons/peoples.png";
 import Dropdownimg from "../../../assets/Icons/dropdown.png";
 import Done from "../Done/Done";
 import getTodayDate from "../../../Service/Calander";
-import AddUser from "../../Models/AddUser/AddUser"
+import AddUser from "../../Models/AddUser/Adduser";
 function Board() {
   const [isOpen, setOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState("today");
@@ -128,10 +128,7 @@ function Board() {
         onRequestClose={() => setisOpenAddUserModal(false)}
         handleAddUser={handleAddUser}
       />
-      {/* <NewTask
-        isOpenNewTask={showModal}
-        onRequestClose={() => setisOpenNewTask(false)}
-        handleNewTask={handleNewTask}/> */}
+      
     </div>
   );
 }

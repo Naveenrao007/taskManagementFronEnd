@@ -39,7 +39,7 @@
     width: 80%;
     margin: 0px auto;
   }
-  form > div {
+  .Loginform > div {
     display: flex;
     align-items: center;
     border: 1.38px solid #d0d0d0;
@@ -48,7 +48,7 @@
     padding: 4px 0px;
   }
   
-  form > div > img {
+  .Loginform > div > img {
     margin-left: 0.4vw;
     margin-right: 0.5vw;
   }
