@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { allfiles } from "./components";
-import "./Common.css";
+import "./common.css";
 import Setting from "./components/Settings/Setting";
 import Analytics from "./components/Analytics/Analytics";
 import Board from "./components/Dashboard/Board/Board";
