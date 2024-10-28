@@ -5,6 +5,7 @@ import createSign from "../../../assets/Icons/createSign.png";
 import NewTask from "../../Models/NewTask/NewTask";
 import { createNewtask } from "../../../Service/Newtask";
 import { ToastContainer, toast, Bounce } from "react-toastify";
+import TaskCard from "../TaskCard/TaskCard";
 function Todo() {
   const [isOpenNewTask, setisOpenNewTask] = useState(false);
   const closeMoel= ()=>{
@@ -20,74 +21,34 @@ function Todo() {
     const response = await createNewtask(taskData);
       if (response.status === 400) { 
       toast.error(response.error.message, {
-        position: "top-right",
         autoClose: 1400,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+      
       });
       setTimeout(() => {
         window.location.href = "/login";
       }, 1900);
     } else if (response.status === 201) {
       toast.success(response.data.message, {
-        position: "top-right",
+      
         autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+       
       });
 
       
     } else if (response.status === 500) {
       toast.error("Internal server error", {
-        position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+              });
     } else if (response.status === 404) {
       toast.error("Url is incorrect", {
-        position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+       
       });
     }
   };
   return (
     <div className="">
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition:Bounce
-      />
+     
 
       <div className="flexdc">
         <div className="flexdr jcsb">
@@ -104,7 +65,9 @@ function Todo() {
             </div>
           </div>
         </div>
-        <div className={`overflowY`}></div>
+        <div className={`overflowY`}>
+          <TaskCard/>
+        </div>
       </div>
       <NewTask
         isOpenNewTask={isOpenNewTask}

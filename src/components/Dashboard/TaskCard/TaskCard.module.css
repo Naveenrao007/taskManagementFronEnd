@@ -1,0 +1,9 @@
+
+
+.cardContainer{
+    background-color: #FFFFFF;
+    max-width: 312px;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 20px
+}

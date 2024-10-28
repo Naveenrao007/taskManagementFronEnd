@@ -66,62 +66,23 @@ function Login() {
 
       const response = await login(formData);
       console.log(response);
-      
+
       if (response.status === 400) {
         toast.error(response.error.message, {
-          position: "top-right",
           autoClose: 1400,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
+          
         });
-        // setTimeout(() => {
-        //   window.location.href = "/login";
-        // }, 1900);
+       
       } else if (response.status === 200) {
-        toast.success(response.data.message, {
-          position: "top-right",
-          autoClose: 500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toast.success(response.data.message, { autoClose: 500 });
         setTimeout(() => {
           localStorage.setItem("token", response.data.token);
           navigate("/dashboard/board");
         }, 600);
       } else if (response.status === 500) {
-        toast.error("Internal server error", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toast.error("Internal server error");
       } else if (response.status === 404) {
-        toast.error("Url is incorrect", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
+        toast.error("Url is incorrect");
       }
     } else {
       setErrors(errors);
@@ -130,19 +91,7 @@ function Login() {
 
   return (
     <div className={style.container}>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition:Bounce
-      />
+      
       <div className={`open-sans ${style.leftSide}`}>
         <div>
           <img src={image1} alt="here is a image" />

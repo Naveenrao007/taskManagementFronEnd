@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { allfiles } from "./components";
+import "react-toastify/dist/ReactToastify.css";
 import "./common.css";
 import Setting from "./components/Settings/Setting";
 import Analytics from "./components/Analytics/Analytics";
@@ -15,6 +17,19 @@ function App() {
   return (
     <BrowserRouter>
       <div>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        
         <Routes>
           <Route
             path="/"

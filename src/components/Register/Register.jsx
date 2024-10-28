@@ -84,15 +84,8 @@ function Register() {
       const response = await register(formData);
       if (response.status === 400) {
         toast.error(response.error.message, {
-          position: "top-right",
           autoClose: 1400,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
+        
         });
         setTimeout(() => {
           window.location.href = "/login";
@@ -100,42 +93,21 @@ function Register() {
       } else if (response.status === 201) {
         console.log(response);
         toast.success(response.data.message, {
-          position: "top-right",
           autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
+          
         });
         setTimeout(() => {
           navigate("/login");
         }, 2100);
       } else if (response.status === 500) {
         toast.error("Internal server error", {
-          position: "top-right",
+          
           autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
+        
         });
       } else if (response.status === 404) {
         toast.error("Url is incorrect", {
-          position: "top-right",
           autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
         });
       }
     } else {
@@ -145,19 +117,7 @@ function Register() {
 
   return (
     <div className={style.container}>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition:Bounce
-      />
+      
       <div className={`open-sans ${style.leftSide}`}>
         <div>
           <img src={image1} alt="here is a image" />
@@ -170,7 +130,7 @@ function Register() {
       <div className={`open-sans ${style.rightSide}`}>
         <h1 className={` ${style.m_auto} ${style.regheading}`}>Register</h1>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className={style.regDiv}>
             <img src={userImg} alt="user png" />
             <input
               type="text"
@@ -182,7 +142,7 @@ function Register() {
           </div>
 
           {errors.name && <p className={style.errorMsg}>{errors.name}</p>}
-          <div>
+          <div className={style.regDiv}>
             <img src={emailImg} alt="email png" />
             <input
               type="email"
@@ -194,7 +154,7 @@ function Register() {
           </div>
 
           {errors.email && <p className={style.errorMsg}>{errors.email}</p>}
-          <div>
+          <div className={style.regDiv}>
             <img src={passwordImg} alt="password png" />
             <input
               type={visiblePass.password.type}
@@ -216,7 +176,7 @@ function Register() {
             <p className={style.errorMsg}>{errors.password}</p>
           )}
 
-          <div>
+          <div className={style.regDiv}>
             <img src={passwordImg} alt="confirm password png" />
             <input
               type={visiblePass.confirmPassword.type}

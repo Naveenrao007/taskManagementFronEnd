@@ -39,13 +39,15 @@ form {
   width: 80%;
   margin: 0px auto;
 }
-form > div {
-  display: flex;
-  align-items: center;
-  border: 1.38px solid #d0d0d0;
-  margin-top: 1vh;
-  border-radius: 8px;
-  padding: 4px 0px;
+.regDiv{
+  
+    display: flex;
+    align-items: center;
+    border: 1.38px solid #d0d0d0;
+    margin-top: 1vh;
+    border-radius: 8px;
+    padding: 4px 0px;
+  
 }
 
 form > div > img {
@@ -95,9 +97,8 @@ form > div > img {
 }
 .errorMsg {
     color: red;
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 0.35rem;
-    /* margin-bottom: 0.75rem; */
   }
   
 .strongPass{

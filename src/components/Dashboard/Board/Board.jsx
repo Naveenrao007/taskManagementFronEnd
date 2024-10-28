@@ -8,10 +8,15 @@ import Dropdownimg from "../../../assets/Icons/dropdown.png";
 import Done from "../Done/Done";
 import getTodayDate from "../../../Service/Calander";
 import AddUser from "../../Models/AddUser/Adduser";
+import { useOutletContext } from "react-router-dom";
+
 function Board() {
   const [isOpen, setOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState("today");
   const dropdownRef = useRef(null);
+  const { dashboardData } = useOutletContext();
+  console.log(dashboardData);
+  
   const timeFilter = {
     today: "Today",
     thisweek: "This Week",
@@ -39,7 +44,6 @@ function Board() {
     };
   }, [isOpen]);
 
-  // this code for add user model
 
   const [isOpenAddUserModal, setisOpenAddUserModal]  = useState(false)
   const handleAddUser = (e)=>{
@@ -52,7 +56,7 @@ function Board() {
     <div>
       <header className={`${style.boardheader}`}>
         <div className="flexdr jcsb">
-          <p className={`${style.name}`}>Welcome ! Raw</p>
+          <p className={`${style.name}`}>Welcome! {dashboardData.userName} </p>
           <p className={`${style.date}`}>{todayDate}</p>
         </div>
         <div className="flexdr jcsb">

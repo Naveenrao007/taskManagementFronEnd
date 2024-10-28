@@ -18,15 +18,8 @@ const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
 
     if (response.status === 400) {
       toast.error(response.error.message, {
-        position: "top-right",
         autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+      
       });
 
       setTimeout(() => {
@@ -35,42 +28,21 @@ const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
       }, 2000);
     } else if (response.status === 200) {
       toast.success(response.data.message, {
-        position: "top-right",
         autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+      
       });
 
       setAllUserData(response.data.users);
       setUserData(response.data.users);
     } else if (response.status === 500) {
       toast.error("Internal server error", {
-        position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+      
       });
     } else if (response.status === 404) {
       toast.error("Url is incorrect", {
-        position: "top-right",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
+      
       });
     }
   };
@@ -102,19 +74,7 @@ const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
 
   return (
     <div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
-      />
+    
       <Modal
         isOpen={isOpenAddUserModal}
         onRequestClose={onRequestClose}
