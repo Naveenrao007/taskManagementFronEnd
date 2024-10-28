@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import style from "./AddUser.module.css";
 import { allUsers } from "../../../Service/GetAllUser";
-import { ToastContainer, toast, Bounce } from "react-toastify";
-import AddUserToBoard from "../../../Service/AddUserToBoard"
+import { toast } from "react-toastify";
+import AddUserToBoard from "../../../Service/AddUserToBoard";
 Modal.setAppElement("#root");
 
 const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
@@ -19,7 +19,6 @@ const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
     if (response.status === 400) {
       toast.error(response.error.message, {
         autoClose: 1500,
-      
       });
 
       setTimeout(() => {
@@ -29,7 +28,6 @@ const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
     } else if (response.status === 200) {
       toast.success(response.data.message, {
         autoClose: 1500,
-      
       });
 
       setAllUserData(response.data.users);
@@ -37,12 +35,10 @@ const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
     } else if (response.status === 500) {
       toast.error("Internal server error", {
         autoClose: 5000,
-      
       });
     } else if (response.status === 404) {
       toast.error("Url is incorrect", {
         autoClose: 5000,
-      
       });
     }
   };
@@ -62,9 +58,7 @@ const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
   };
 
   const handleAddUserToBoard = async (user) => {
-
-    const res = await AddUserToBoard(user)
-    
+    const res = await AddUserToBoard(user);
   };
   const handleSelectUser = (email) => {
     setSelectedUser(email);
@@ -74,7 +68,6 @@ const AddUser = ({ isOpenAddUserModal, onRequestClose, handleAddUser }) => {
 
   return (
     <div>
-    
       <Modal
         isOpen={isOpenAddUserModal}
         onRequestClose={onRequestClose}

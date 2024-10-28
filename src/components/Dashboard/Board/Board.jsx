@@ -7,7 +7,7 @@ import Peopleimg from "../../../assets/Icons/peoples.png";
 import Dropdownimg from "../../../assets/Icons/dropdown.png";
 import Done from "../Done/Done";
 import getTodayDate from "../../../Service/Calander";
-import AddUser from "../../Models/AddUser/Adduser";
+import AddUser from "../../Models/AddUser/AddUser"
 import { useOutletContext } from "react-router-dom";
 
 function Board() {
