@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import style from "./TaskCard.module.css";
-import threeDot from "../../../assets/Icons/threeDot.png";
+import threeDot from "../../../assets/Icons/threedot.png"
 function TaskCard() {
   const [showDropdown, setshowDropdonw] = useState(false);
   const handleDropdonw = () => {
