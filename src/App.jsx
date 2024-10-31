@@ -7,6 +7,7 @@ import "./common.css";
 import Setting from "./components/Settings/Setting";
 import Analytics from "./components/Analytics/Analytics";
 import Board from "./components/Dashboard/Board/Board";
+import TaskDetails from "./pages/TaskDetails";
 
 function App() {
   const { Login, Register, Dashboard, PageNotFound } = allfiles;
@@ -21,6 +22,7 @@ function App() {
         <ToastContainer autoClose={3000} />
 
         <Routes>
+        <Route path="/dashboard/getTask" element={<TaskDetails />} />
           <Route  path="/" element={ isAuthenticated?(<Navigate to="/dashboard/board" />):(<Navigate to="/login" />)} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />

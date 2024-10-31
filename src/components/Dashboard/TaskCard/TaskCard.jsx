@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import style from "./TaskCard.module.css";
 import threeDot from "../../../assets/Icons/threedot.png";
 import arrowDown from "../../../assets/Icons/arrowDown.png";
-import { manageTaskStatus, deleteTask ,UpdateTask} from "../../../Service/Newtask";
+import {
+  manageTaskStatus,
+  deleteTask,
+  UpdateTask,
+} from "../../../Service/Newtask";
 import { useOutletContext } from "react-router-dom";
 import { toast } from "react-toastify";
 import DeleteModel from "../../Models/Delete/DeleteTask";
@@ -99,17 +103,16 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
     const data = {
       dashboardId: dashboardData.dashboard._id,
       taskId: taskData._id,
-      taskData:taskData,
+      taskData: taskData,
       fromArray,
     };
     try {
       const res = await UpdateTask(data);
       if (res.status === 200) {
         updateDashboardData(res.data.data);
-        toast.success("Task updated successfully", {autoClose:1000});
+        toast.success("Task updated successfully", { autoClose: 1000 });
         setTimeout(() => {
           setIsOpenEditTask(false);
-
         }, 800);
       } else {
         toast.error("Unable to update task");
@@ -118,13 +121,25 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
       toast.error("An error occurred while updating the task");
     }
   };
-
   const handleShare = async (taskDetails) => {
     console.log("Share task:", taskDetails);
+
     const data = {
       dashboardId: dashboardData.dashboard._id,
-      taskDetails: taskDetails,
+      taskId: taskDetails._id,
+      fromArray: fromArray,
     };
+
+    const baseURL = window.location.origin;
+    const queryString = new URLSearchParams(data).toString();
+    const shareableLink = `${baseURL}/dashboard/getTask?${queryString}`;
+    try {
+      await navigator.clipboard.writeText(shareableLink);
+      toast.success("Task details link copied to clipboard!");
+    } catch (error) {
+      console.error("Failed to copy task details:", error);
+      toast.error("Failed to copy task details.");
+    }
   };
 
   return (

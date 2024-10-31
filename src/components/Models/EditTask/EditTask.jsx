@@ -210,7 +210,7 @@ const EditTask = ({
           <div className={`${style.datecontainer}`}>
             <button
               className={`${style.btn_fonts} ${style.btn_select_date}`}
-              onClick={() => setCalendarVisible((prev) => !prev)} // Toggle calendar visibility
+              onClick={() => setCalendarVisible((prev) => !prev)} 
             >
               {taskData.dueDate
                 ? taskData.dueDate.toDateString()
