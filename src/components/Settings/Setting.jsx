@@ -7,7 +7,7 @@ import openEyeImg from "../../assets/Icons/eye.png";
 import closedEyeImg from "../../assets/Icons/closedEye.png";
 import passwordImg from "../../assets/Icons/password.png";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateUser } from "../../Service/Auth";
 function Settings() {
@@ -64,27 +64,19 @@ function Settings() {
     if (count === 1 && formData.password && !formData.confirmPassword) {
       errors.confirmPassword = "Enter confirm Password";
     }
-
     return errors;
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const errors = validate();
-
     if (Object.keys(errors).length === 0) {
       setErrors({});
-
       const response = await updateUser(formData);
       if (response.status === 400) {
         console.log("tree".response);
-
         console.log("message", response.error.message);
-
         toast.error(response.error.message, {
           autoClose: 1400,
-         
         });
         setTimeout(() => {
           window.location.href = "/login";
@@ -92,17 +84,14 @@ function Settings() {
       } else if (response.status === 201) {
         toast.success(response.data.message, {
           autoClose: 5000,
-          
         });
       } else if (response.status === 500) {
         toast.error("Internal server error", {
           autoClose: 5000,
-        
         });
       } else if (response.status === 404) {
         toast.error("Url is incorrect", {
           autoClose: 5000,
-          
         });
       }
     } else {
@@ -112,7 +101,6 @@ function Settings() {
 
   return (
     <div className={style.container}>
-     
       <div className={`open-sans ${style.rightSide}`}>
         <h1 className={` ${style.m_auto} ${style.regheading}`}>Register</h1>
         <form onSubmit={handleSubmit}>
@@ -126,7 +114,6 @@ function Settings() {
               placeholder="Name"
             />
           </div>
-
           {errors.name && <p className={style.errorMsg}>{errors.name}</p>}
           <div>
             <img src={emailImg} alt="email png" />

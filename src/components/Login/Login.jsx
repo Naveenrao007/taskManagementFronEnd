@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import style from "./Login.module.css";
 import image1 from "../../assets/Images/image1.png";
-import userImg from "../../assets/Icons/user.jpg";
 import emailImg from "../../assets/Icons/email.png";
 import openEyeImg from "../../assets/Icons/eye.png";
 import closedEyeImg from "../../assets/Icons/closedEye.png";
 import passwordImg from "../../assets/Icons/password.png";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { login } from "../../Service/Auth";
 function Login() {
   const navigate = useNavigate();
@@ -55,30 +53,24 @@ function Login() {
 
     return errors;
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const errors = validate();
-
     if (Object.keys(errors).length === 0) {
       setErrors({});
-
       const response = await login(formData);
       console.log(response);
-
       if (response.status === 400) {
         toast.error(response.error.message, {
           autoClose: 1400,
-          
         });
-       
       } else if (response.status === 200) {
-        toast.success(response.data.message, { autoClose: 500 });
+        localStorage.setItem("token", response.data.token);
+        toast.success(response.data.message, { autoClose: 1200 });
         setTimeout(() => {
-          localStorage.setItem("token", response.data.token);
+          console.log("i am workfing");
           navigate("/dashboard/board");
-        }, 600);
+        }, 2500);
       } else if (response.status === 500) {
         toast.error("Internal server error");
       } else if (response.status === 404) {
@@ -91,7 +83,6 @@ function Login() {
 
   return (
     <div className={style.container}>
-      
       <div className={`open-sans ${style.leftSide}`}>
         <div>
           <img src={image1} alt="here is a image" />

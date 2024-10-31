@@ -3,9 +3,9 @@
   width: 82vw;
   font-family: var(--poppins);
 
-  height: 84vh;
+  height: 82vh;
   overflow-y: hidden;
-  grid-template-columns: 18rem 18rem 18rem 18rem;
+  grid-template-columns: 19rem 19rem 19rem 19rem;
   gap: 1.5rem;
   overflow-x: scroll;
   padding: 0.5rem 2rem;

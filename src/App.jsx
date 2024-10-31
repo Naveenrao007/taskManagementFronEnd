@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { allfiles } from "./components";
@@ -13,37 +13,21 @@ function App() {
 
   const token = localStorage.getItem("token");
   const isAuthenticated = !!token;
-
+ console.log("is",isAuthenticated);
+ 
   return (
     <BrowserRouter>
       <div>
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-        
+        <ToastContainer autoClose={3000} />
+
         <Routes>
-          <Route
-            path="/"
-            element={
-              isAuthenticated ? (
-                <Navigate to="/dashboard/board" />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
+          <Route  path="/" element={ isAuthenticated?(<Navigate to="/dashboard/board" />):(<Navigate to="/login" />)} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />}>
+          <Route
+            path="/dashboard"
+            element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
+          >
             <Route index element={<Board />} />
             <Route path="board" element={<Board />} />
             <Route path="settings" element={<Setting />} />

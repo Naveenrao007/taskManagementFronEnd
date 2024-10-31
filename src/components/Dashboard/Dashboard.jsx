@@ -21,24 +21,28 @@ function Dashboard() {
     if (res.status == 400 && !hasErrorShown.current) {
       toast.error(res.data.message, {
         autoClose: 1800,
+        transition:Bounce
       });
       setTimeout(() => {
-        localStorage.removeItem("token");
         window.location.href = "/login";
       }, 2200);
       hasErrorShown.current = true;
     } else if (res.status == 200) {
       setIsLoading(false);
-      console.log(res.data);
+      console.log("ffff",res.data.data);
       setdashboardData(res.data.data)
-      console.log("ddd",dashboardData);
       
     }
   };
+  
   useEffect(() => {
     getdata();
   }, []);
-
+  const updateDashboardData = (newData) => {
+    console.log(newData);
+    
+    setdashboardData(newData);
+  };
   return (
     <>
       {isLoading ? (
@@ -49,7 +53,7 @@ function Dashboard() {
             <Navbar OnLogout={() => setIsModalOpen(true)} />
           </div>
           <div className="width82vw">
-            <Outlet context= {{dashboardData}} />
+            <Outlet context= {{dashboardData ,updateDashboardData }} />
           </div>
         </div>
       )}

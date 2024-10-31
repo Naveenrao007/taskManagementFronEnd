@@ -1,66 +1,64 @@
 import React, { useState, useEffect, useRef } from "react";
-import style from "./Checklist.module.css";
+import style from "./EditCheckList.module.css";
 
-const Checklist = ({ onUpdateChecklist }) => {
-  const [checklist, setChecklist] = useState([]);
-  const prevChecklistRef = useRef(checklist);
+const EditCheckList = ({ handleEditCheckList, checkList}) => {
+  const [EditCheckList, setEditCheckList] = useState([]);
+  const prevEditCheckListRef = useRef(EditCheckList);
 
-  const handleAddChecklistItem = () => {
-    setChecklist((prev) => [
-      ...prev,
-      { id: Date.now(), text: "", completed: false },
-    ]);
-  };
 
+  useEffect(() => {
+    setEditCheckList(checkList);
+  }, [checkList])
+ 
   const handleCheckbox = (id) => {
-    setChecklist((prevChecklist) =>
-      prevChecklist.map((item) =>
+    setEditCheckList((prevEditCheckList) =>
+      prevEditCheckList.map((item) =>
         item.id === id ? { ...item, completed: !item.completed } : item
       )
     );
   };
 
-  const handleTitleChange = (id, text) => {
-    setChecklist((prevChecklist) =>
-      prevChecklist.map((item) => {
-        return item.id === id ? { ...item, text } : item;
+  const handleTitleChange = (id, title) => {
+    setEditCheckList((prevEditCheckList) =>
+      prevEditCheckList.map((item) => {
+        return item.id === id ? { ...item, title } : item;
       })
     );
   };
 
   const handleDelete = (id) => {
-    setChecklist((prevChecklist) =>
-      prevChecklist.filter((item) => item.id !== id)
+    setEditCheckList((prevEditCheckList) =>
+      prevEditCheckList.filter((item) => item.id !== id)
     );
   };
 
   useEffect(() => {
-    if (prevChecklistRef.current !== checklist) {
-      onUpdateChecklist(checklist);
-      prevChecklistRef.current = checklist;
+    if (prevEditCheckListRef.current !== EditCheckList) {
+      handleEditCheckList(EditCheckList);
+      prevEditCheckListRef.current = EditCheckList;
     }
-  }, [checklist, onUpdateChecklist]);
+  }, [EditCheckList, handleEditCheckList]);
 
   return (
-    <div className={style.checklistparentcontainer}>
-      <div className={`inter ${style.checklistTxt}`}>
-        Checklist (<span>{checklist.filter((i) => i.completed).length}</span>/
-        <span>{checklist.length}</span>)
+    <div className={style.EditCheckListparentcontainer}>
+      <div className={`inter ${style.EditCheckListTxt}`}>
+        EditCheckList (<span>{EditCheckList.filter((i) => i.completed).length}</span>/
+        <span>{EditCheckList.length}</span>)
         <span className={`${style.mandatoryfield}`}>*</span>
       </div>
-      {checklist.length > 0 && (
+      {EditCheckList.length > 0 && (
         <div className={style.overflowy}>
           <ul className={`flexdc gap1rem`}>
-            {checklist.map((item) => (
+            {EditCheckList.map((item) => (
               <div className="flexdr" key={item.id}>
-                <ul className={`flexdr gap1rem ${style.checklistcontainer}`}>
+                <ul className={`flexdr gap1rem ${style.EditCheckListcontainer}`}>
                   <li className={style.checkbox}>
                     <input
                       className="cp"
                       type="checkbox"
                       onChange={() => handleCheckbox(item.id)}
                       checked={item.completed}
-                      aria-label={`Checkbox for task: ${item.text}`}
+                      aria-label={`Checkbox for task: ${item.title}`}
                     />
                   </li>
                   <li className={style.width90per}>
@@ -68,7 +66,7 @@ const Checklist = ({ onUpdateChecklist }) => {
                       className={style.taskname}
                       type="text"
                       placeholder="Task name"
-                      value={item.text}
+                      value={item.title}
                       onChange={(e) =>
                         handleTitleChange(item.id, e.target.value)
                       }
@@ -77,7 +75,7 @@ const Checklist = ({ onUpdateChecklist }) => {
                   <li className={style.delete}>
                     <button
                       onClick={() => handleDelete(item.id)}
-                      aria-label={`Delete task: ${item.text}`}
+                      aria-label={`Delete task: ${item.title}`}
                     >
                       <svg
                         width="16"
@@ -99,13 +97,9 @@ const Checklist = ({ onUpdateChecklist }) => {
           </ul>
         </div>
       )}
-      <div className="flexdr">
-        <p className={`inter ${style.addnew}`} onClick={handleAddChecklistItem}>
-          <span>+</span> Add New
-        </p>
-      </div>
+      
     </div>
   );
 };
 
-export default Checklist;
+export default EditCheckList;

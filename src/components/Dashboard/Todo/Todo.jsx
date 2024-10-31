@@ -1,32 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Todo.module.css";
 import collapse from "../../../assets/Icons/collapse.png";
 import createSign from "../../../assets/Icons/createSign.png";
 import NewTask from "../../Models/NewTask/NewTask";
 import { createNewtask } from "../../../Service/Newtask";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import { toast, Bounce } from "react-toastify";
+import { useOutletContext } from "react-router-dom";
 import TaskCard from "../TaskCard/TaskCard";
 function Todo() {
   const [isOpenNewTask, setisOpenNewTask] = useState(false);
-  const closeMoel= ()=>{
-        
+  const [tododData, settodoData] = useState([])
+  const { dashboardData } = useOutletContext();
+  const [closeAllChecklists, setCloseAllChecklists] = useState(false);
+
+  const closeModel= ()=>{
     setisOpenNewTask(false)
-
   }
-
+  const handleCollapseClick = () => {
+    setCloseAllChecklists((prev) => !prev); 
+  };
+  useEffect(()=>{
+    settodoData(dashboardData.dashboard?.Todo)
+  },[dashboardData])
   const handleNewTask = async(taskData) => {
-    console.log("tofof",taskData);
-  closeMoel()
-
     const response = await createNewtask(taskData);
       if (response.status === 400) { 
       toast.error(response.error.message, {
-        autoClose: 1400,
+        autoClose: 1000,
+        transition:Bounce
       
       });
       setTimeout(() => {
+        closeModel()
+
         window.location.href = "/login";
-      }, 1900);
+      }, 1200);//1800
     } else if (response.status === 201) {
       toast.success(response.data.message, {
       
@@ -60,13 +68,13 @@ function Todo() {
             >
               <img className="cp" src={createSign} alt="" />
             </div>
-            <div>
-              <img src={collapse} alt="collapseSvg" />
+            <div className="cp" onClick={handleCollapseClick}>
+              <img src={collapse} alt="collapseSvg"  />
             </div>
           </div>
         </div>
-        <div className={`overflowY`}>
-          <TaskCard/>
+        <div className={`overflowY ${style.gap}`} >
+          <TaskCard taskData = {tododData} fromArray="Todo" closeAllChecklists={closeAllChecklists}/>
         </div>
       </div>
       <NewTask

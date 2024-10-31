@@ -108,6 +108,7 @@ function Register() {
       } else if (response.status === 404) {
         toast.error("Url is incorrect", {
           autoClose: 5000,
+          
         });
       }
     } else {

@@ -17,18 +17,18 @@
   background: #ffffff;
   border-radius: 8px;
   max-width: 650px;
+  display: flex;
   width: 100%;
   text-align: center;
   outline: none;
 }
-.commonPaddinglr{
-
+.commonPaddinglr {
   padding: 0rem 2rem;
-} 
-.pdtop1rem{
+}
+.pdtop1rem {
   padding-top: 1rem;
 }
-.pdbtm1rem{
+.pdbtm1rem {
   padding-bottom: 1rem;
 }
 
@@ -45,7 +45,7 @@
   padding-left: 1rem;
   margin-bottom: 2rem;
 }
-.datecontainer{
+.datecontainer {
   width: 35%;
   display: flex;
   position: relative;
@@ -55,20 +55,18 @@
   flex-direction: row;
   gap: 1rem;
   width: 60%;
-
 }
 
 .btn_cancel {
   background-color: #ffffff;
-  color: #CF3636;
-  border: 1px solid #CF3636;
+  color: #cf3636;
+  border: 1px solid #cf3636;
   width: 50%;
 }
 .btn_select_date {
   background-color: #ffffff;
   color: #707070;
   border: 1px solid #707070;
-
 }
 
 .btn_logout {
@@ -78,33 +76,31 @@
   width: 50%;
 }
 
-.title{
-display: flex;
-flex-direction: column;
-align-items:flex-start;
-font-size: 14px;
-font-weight: 500;
-line-height: 24px;
-letter-spacing: 0.5px;
-text-align: left;
-
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  text-align: left;
 }
-.inputfield{
-width: 96.7%;
-border:  1px solid #E2E2E2;
-border-radius: 8px;
-padding: 0.5rem;
+.inputfield {
+  width: 96.7%;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 0.2rem 0.5rem;
 }
 .btn_fonts {
   text-decoration: none;
-  padding: 0.7rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 16px;
   line-height: 19px;
   font-weight: 600;
   border-radius: 11px;
   cursor: pointer;
 }
-
 
 .suggestionContainer {
   max-height: 200px;
@@ -123,101 +119,96 @@ padding: 0.5rem;
   background-color: #c2baba;
 }
 
-.priorityOpt{
-color: rebeccapurple;
-list-style: none;
-display: flex;
-align-items: center;
-gap: 0.50rem;
-font-size: 12px;
-font-weight: 500;
-line-height: 18px;
-border: 1px solid #E2E2E2;
-border-radius: 8px;
- padding: 6px 12px;
- cursor: pointer;
+.priorityOpt {
+  color: rebeccapurple;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 18px;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
 }
-.priorityOpt >p{
+.priorityOpt > p {
   color: #767575;
   font-weight: 500;
 }
-.priorityText{
+.priorityText {
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0.5px;
-  
 }
-.dot{
-
+.dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
-form >div{
+form > div {
   border: none;
   margin-top: 0vh;
   border-radius: 0px;
   padding: 0px 0px;
 }
-.mrleft1rem{
+.mrleft1rem {
   margin-left: 0.7rem;
 }
-.formContainer{
-width: 100%;
-font-family: var(--poppins);
-display: flex;
-flex-direction: column;
-gap: 1rem;
-
-
+.formContainer {
+  width: 100%;
+  font-family: var(--poppins);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.green{
-  background-color: #63C05B;
-
+.green {
+  background-color: #63c05b;
 }
-.blue{
-  background-color: #18B0FF;
-
+.blue {
+  background-color: #18b0ff;
 }
-.red{
-  background-color: #FF2473;
-
+.red {
+  background-color: #ff2473;
 }
-.mandatoryfield{
-  color:  red;
+.mandatoryfield {
+  color: red;
 }
-
 
 .checklistOverflowY {
   height: 5vh;
   overflow-y: scroll;
 }
 
-.openCalander{
+.openCalander {
   display: none;
   position: absolute;
-background: bisque;
-top: -180px;
-left: 100px;
+  background: bisque;
+  top: -180px;
+  left: 100px;
 }
-.closeCalander{
+.closeCalander {
   display: none;
 }
 
-.selectedPriority{
-  background-color: #EEECEC;
+.selectedPriority {
+  background-color: #eeecec;
 }
 
-.errorMessage{
+.errorMessage {
   color: red;
   padding-top: 0.5rem;
 }
 
-.errorDiv{
+.errorDiv {
   text-align: start;
   padding-left: 2rem;
   margin-top: -1rem;
 }
 
+.mrbtm1rem{
+  margin-bottom: 1rem;
+}

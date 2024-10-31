@@ -1,25 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import style from "./NewTask.module.css";
-import Checklist from "./Checklist/Checklist";
+import style from "./EditTask.module.css";
+import EditCheckList from "./EditCheckList/EditCheckList";
 import Calendar from "react-calendar";
 import AllUsers from "../AllUser/AllUser";
 
 Modal.setAppElement("#root");
-const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
+
+const EditTask = ({
+  isOpenEditTask,
+  onRequestClose,
+  handleEditTask,
+  initialTaskData,
+}) => {
   const [taskData, setTaskData] = useState({
     title: "",
     priority: "",
     assignTo: "",
-    dueDate: "",
-    checklist: [],
+    dueDate: new Date(),
+    checkList: [],
   });
-  const [errors, setErrors] = useState({});
 
-  const handleChecklistUpdate = (updatedChecklist) => {
+  useEffect(() => {
+    if (initialTaskData) {
+      setTaskData(initialTaskData);
+    }
+  }, [initialTaskData]);
+
+  const [errors, setErrors] = useState({});
+  const [calendarVisible, setCalendarVisible] = useState(false);
+
+  const handleEditCheckList = (updatedChecklist) => {
     setTaskData((prev) => ({
       ...prev,
-      checklist: updatedChecklist,
+      checkList: updatedChecklist,
     }));
   };
 
@@ -62,12 +76,12 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
       newErrors.priority = "Priority is required.";
     }
 
-    if (taskData.checklist.length === 0) {
-      newErrors.checklist = "At least one checklist item is required.";
+    if (taskData.checkList.length === 0) {
+      newErrors.checkList = "At least one checklist item is required.";
     } else {
-      const checklistErrors = taskData.checklist
+      const checklistErrors = taskData.checkList
         .map((item, index) => {
-          if (!item.text.trim()) {
+          if (!item.title.trim()) {
             return `Item ${index + 1} must have a title.`;
           }
           return null;
@@ -75,30 +89,29 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
         .filter((error) => error !== null);
 
       if (checklistErrors.length > 0) {
-        newErrors.checklist = checklistErrors;
+        newErrors.checkList = checklistErrors;
       }
     }
 
     return newErrors;
   };
 
-  const handleSave = () => {
+  const handleUpdate = () => {
+    setErrors({});
     const errors = validateForm();
 
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
       return;
     }
-
-    setErrors({});
-    handleNewTask(taskData);
+    handleEditTask(taskData);
   };
 
   return (
     <Modal
-      isOpen={isOpenNewTask}
+      isOpen={isOpenEditTask}
       onRequestClose={onRequestClose}
-      contentLabel="New Task"
+      contentLabel="Edit Task"
       className={style.modal_content}
       overlayClassName={style.modal_overlay}
     >
@@ -107,7 +120,7 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
           <form className={`poppins ${style.formContainer}`}>
             <div className={`${style.title} ${style.commonPaddinglr}`}>
               <p className="inter">
-                Title <span className={`${style.mandatoryfield}`}>*</span>
+                Edit Title <span className={`${style.mandatoryfield}`}>*</span>
               </p>
               <input
                 className={`${style.inputfield} ${
@@ -170,18 +183,21 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
             </div>
 
             <div className={`flexdc alignItmFlexStart`}>
-              <Checklist
-                onUpdateChecklist={handleChecklistUpdate}
+              <EditCheckList
+                handleEditCheckList={handleEditCheckList}
                 errors={errors}
+                checkList={initialTaskData.checkList}
               />
-              {errors.checklist && (
-                <div className={`${style.errorDiv} ${style.errorMessage} ${style.mrbtm1rem  }`}>
-                  {Array.isArray(errors.checklist) ? (
-                    errors.checklist.map((error, index) => (
+              {errors.checkList && (
+                <div
+                  className={`${style.errorDiv} ${style.errorMessage} ${style.mrbtm1rem}`}
+                >
+                  {Array.isArray(errors.checkList) ? (
+                    errors.checkList.map((error, index) => (
                       <p key={index}>{error}</p>
                     ))
                   ) : (
-                    <p>{errors.checklist}</p>
+                    <p>{errors.checkList}</p>
                   )}
                 </div>
               )}
@@ -194,19 +210,21 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
           <div className={`${style.datecontainer}`}>
             <button
               className={`${style.btn_fonts} ${style.btn_select_date}`}
-              onClick={() => {}}
+              onClick={() => setCalendarVisible((prev) => !prev)} // Toggle calendar visibility
             >
               {taskData.dueDate
                 ? taskData.dueDate.toDateString()
                 : "Select Due Date"}
             </button>
-            <div className={`${style.openCalander} ${style.custom_calendar}`}>
-              <Calendar
-                onChange={handleDueDateChange}
-                value={taskData.dueDate}
-                minDate={new Date()}
-              />
-            </div>
+            {calendarVisible && (
+              <div className={`${style.openCalander} ${style.custom_calendar}`}>
+                <Calendar
+                  onChange={handleDueDateChange}
+                  value={taskData.dueDate}
+                  minDate={new Date()}
+                />
+              </div>
+            )}
           </div>
           <div className={style.modal_buttons}>
             <button
@@ -216,10 +234,10 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
               Cancel
             </button>
             <button
-              onClick={handleSave}
+              onClick={handleUpdate}
               className={`poppins ${style.btn_logout} ${style.btn_fonts}`}
             >
-              Save
+              Update
             </button>
           </div>
         </div>
@@ -228,4 +246,4 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
   );
 };
 
-export default NewTask;
+export default EditTask;

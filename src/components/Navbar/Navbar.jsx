@@ -7,14 +7,14 @@ import layout from "../../assets/Icons/layout.png";
 import settings from "../../assets/Icons/settings.png";
 import logoutIcon from "../../assets/Icons/Logout.png";
 import LogoutModal from "../../components/Logout/Logout";
+import { Bounce, toast } from "react-toastify";
 
 function Navbar() {
   const [showModal, setShowModal] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/login";
-    console.log("User logged out");
+  window.location.href = "/login";
     setShowModal(false);
   };
 
