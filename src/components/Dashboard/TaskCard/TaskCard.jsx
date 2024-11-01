@@ -125,7 +125,6 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
     console.log("Share task:", taskDetails);
 
     const data = {
-      dashboardId: dashboardData.dashboard._id,
       taskId: taskDetails._id,
       fromArray: fromArray,
     };
@@ -149,7 +148,17 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
           <div className={`${style.subcontainer}`} key={item._id}>
             <div className="flexdr jcsb">
               <div className={`flexdr alignItmC ${style.prioritydiv}`}>
-                <p className={`${style.Prioritydot} ${item.priority ==="high"?style.highcolor:(item.priority==="mid"?style.midcolor:style.lowcolor)}`}>.</p>
+                <p
+                  className={`${style.Prioritydot} ${
+                    item.priority === "high"
+                      ? style.highcolor
+                      : item.priority === "mid"
+                      ? style.midcolor
+                      : style.lowcolor
+                  }`}
+                >
+                  .
+                </p>
                 <p>{priorityObj[item.priority]}</p>
               </div>
               <div
@@ -216,7 +225,10 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
               >
                 {Array.isArray(item.checkList) ? (
                   item.checkList.map((checkList) => (
-                    <div className={`flexdr ${style.checklistdivborder}`} key={checkList.id}>
+                    <div
+                      className={`flexdr ${style.checklistdivborder}`}
+                      key={checkList.id}
+                    >
                       <input type="checkbox" id={checkList.id} />
                       <p>{checkList.title}</p>
                     </div>
@@ -249,7 +261,7 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
                   }`}
                   onClick={() => handleTaskStatus("Todo", `${item._id}`)}
                 >
-                  Todo
+                  To-do
                 </button>
                 <button
                   className={`${style.cardBtn} ${

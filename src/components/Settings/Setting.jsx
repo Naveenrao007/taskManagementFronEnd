@@ -21,6 +21,9 @@ function Settings() {
     newPassword: { type: "password", sourceImg: closedEyeImg },
   });
 
+
+console.log(dashboardData);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",

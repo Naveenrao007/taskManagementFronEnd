@@ -99,7 +99,7 @@ const Checklist = ({ onUpdateChecklist }) => {
           </ul>
         </div>
       )}
-      <div className="flexdr">
+      <div className="flexdr cp">
         <p className={`inter ${style.addnew}`} onClick={handleAddChecklistItem}>
           <span>+</span> Add New
         </p>

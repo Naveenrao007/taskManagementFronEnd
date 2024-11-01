@@ -54,7 +54,7 @@ function Todo() {
     <div className="">
       <div className="flexdc">
         <div className="flexdr jcsb">
-          <div>Todo</div>
+          <div>To do</div>
           <div className="flexdr gap10px">
             <div
               className={style.createSign}
