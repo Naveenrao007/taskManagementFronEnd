@@ -1,8 +1,6 @@
 
 export function addTokenToHeader({ headers }) {
-    const token = localStorage.getItem("token");
-    console.log("tokenrrr", token);
-    
+    const token = localStorage.getItem("token");    
     if (token) {
         headers.Authorization = `${token}`;
     }

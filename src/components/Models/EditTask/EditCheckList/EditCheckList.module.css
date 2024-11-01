@@ -83,13 +83,21 @@
     margin-bottom: 2rem;
   }
   .taskname{
-  font-size: 16px;
-  font-weight:400;
-  line-height: 19px;
-  color: #000000;
-  width: 100%;
+    font-family: var(--open-sans);
+    font-size: 16px;
+    font-weight:400;
+    line-height: 19px;
+    color: #000000;
+    outline: none;
+    border: none;
+    width: 1005%;
   }
   .width90per{
       width: 90%;
+  }
+  .EditCheckListparentcontainer{
+    width: 100%;
+  
+    padding: 1rem 1.5rem;
   }
   

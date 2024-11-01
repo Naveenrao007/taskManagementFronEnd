@@ -177,7 +177,7 @@ const EditTask = ({
                 <p className={`${style.errorMessage}`}>{errors.priority}</p>
               )}
             </div>
-            <div className={`${style.commonPaddinglr}`}>
+            <div className={` flexdr jcsb ${style.commonPaddinglr}`}>
               <div>Assign To</div>
               <AllUsers onAssignUser={handleAssignToChange} />
             </div>

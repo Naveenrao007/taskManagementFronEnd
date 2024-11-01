@@ -7,15 +7,14 @@
   
   .inputField {
     width: 100%;
-    padding: 0.2rem 0.5rem;
+    padding: 0.7rem;
     border: 1px solid #ddd;
     border-radius: 4px;
   }
   
   .dropdownList {
     position: absolute;
-    width: 103.5%;
-    /* max-width: 486px; */
+    width: 100%;
     overflow-y: auto;
     border: 1px solid #ddd;
     background-color: white;

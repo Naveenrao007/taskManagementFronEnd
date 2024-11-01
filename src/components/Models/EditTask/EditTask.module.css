@@ -87,10 +87,10 @@
     text-align: left;
   }
   .inputfield {
-    width: 96.7%;
+    width: 100%;
     border: 1px solid #e2e2e2;
     border-radius: 8px;
-    padding: 0.2rem 0.5rem;
+    padding: 0.7rem;
   }
   .btn_fonts {
     text-decoration: none;

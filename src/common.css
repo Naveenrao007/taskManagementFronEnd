@@ -115,7 +115,7 @@
 }
 
 .overflowY {
-  height: 75vh;
+  height: 71vh;
   overflow-y: scroll;
 }
 
@@ -151,6 +151,9 @@
 }
 
 
-.ansh{
-  color: saddlebrown;
+.list_styleNone{
+  list-style: none;
+}
+.gaphalfrem{
+  gap: 0.5rem;
 }

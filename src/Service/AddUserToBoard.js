@@ -1,9 +1,10 @@
+import axios from "axios";
 import { addTokenToHeader } from "../helper/Header";
 const AddUserToBoard = async (data) => {
     const headers = addTokenToHeader({ headers: {} });
 
     try {
-        const res = await axios.post(`${import.meta.env.VITE_BaseUrl}/user/adduser`, data, {
+        const res = await axios.post(`${import.meta.env.VITE_BaseUrl}/dashboard/adduser`, data, {
             headers
         });
 

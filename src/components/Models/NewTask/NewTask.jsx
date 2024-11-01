@@ -15,6 +15,7 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
     checklist: [],
   });
   const [errors, setErrors] = useState({});
+  const[openCalander, setOpenCalander] = useState(false);
 
   const handleChecklistUpdate = (updatedChecklist) => {
     setTaskData((prev) => ({
@@ -164,7 +165,7 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
                 <p className={`${style.errorMessage}`}>{errors.priority}</p>
               )}
             </div>
-            <div className={`${style.commonPaddinglr}`}>
+            <div className={`flexdr jcsb ${style.commonPaddinglr}`}>
               <div>Assign To</div>
               <AllUsers onAssignUser={handleAssignToChange} />
             </div>
@@ -175,7 +176,9 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
                 errors={errors}
               />
               {errors.checklist && (
-                <div className={`${style.errorDiv} ${style.errorMessage} ${style.mrbtm1rem  }`}>
+                <div
+                  className={`${style.errorDiv} ${style.errorMessage} ${style.mrbtm1rem}`}
+                >
                   {Array.isArray(errors.checklist) ? (
                     errors.checklist.map((error, index) => (
                       <p key={index}>{error}</p>
@@ -194,19 +197,23 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
           <div className={`${style.datecontainer}`}>
             <button
               className={`${style.btn_fonts} ${style.btn_select_date}`}
-              onClick={() => {}}
+              onClick={() => {
+                setOpenCalander((prev) => !prev);
+              }}
             >
               {taskData.dueDate
                 ? taskData.dueDate.toDateString()
                 : "Select Due Date"}
             </button>
-            <div className={`${style.openCalander} ${style.custom_calendar}`}>
-              <Calendar
-                onChange={handleDueDateChange}
-                value={taskData.dueDate}
-                minDate={new Date()}
-              />
-            </div>
+            {openCalander && (
+              <div className={`${style.openCalander} ${style.custom_calendar}`}>
+                <Calendar
+                  onChange={handleDueDateChange}
+                  value={taskData.dueDate}
+                  minDate={new Date()}
+                />
+              </div>
+            )}
           </div>
           <div className={style.modal_buttons}>
             <button

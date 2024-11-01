@@ -38,6 +38,14 @@
   margin-top: 2rem;
   width: 100%;
 }
+.modal_buttonfinal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 100%;
+}
 
 .btn_cancel {
   background-color: #ffffff;
@@ -52,7 +60,12 @@
   border: none;
   width: 50%;
 }
-
+.btn_okay{
+  background-color: #17a2b8;
+  color: #ffffff;
+  border: none;
+  width: 50%;
+}
 .btn_fonts {
   text-decoration: none;
   padding: 0.4rem 1rem;

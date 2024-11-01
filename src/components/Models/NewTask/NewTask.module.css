@@ -49,6 +49,7 @@
   width: 35%;
   display: flex;
   position: relative;
+  
 }
 .modal_buttons {
   display: flex;
@@ -87,11 +88,14 @@
   text-align: left;
 }
 .inputfield {
-  width: 96.7%;
-  border: 1px solid #e2e2e2;
-  border-radius: 8px;
-  padding: 0.2rem 0.5rem;
+  width: 100%;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    padding: 0.7rem 0.7rem;
 }
+.inputfield:focus{
+  outline: 2px solid #d1d5db;
+  }
 .btn_fonts {
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -184,16 +188,19 @@ form > div {
 }
 
 .openCalander {
-  display: none;
+  display: flex;
   position: absolute;
-  background: bisque;
+  background: rgb(223, 218, 212);
   top: -180px;
   left: 100px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .closeCalander {
   display: none;
 }
-
+.custom_calendar{
+  
+}
 .selectedPriority {
   background-color: #eeecec;
 }

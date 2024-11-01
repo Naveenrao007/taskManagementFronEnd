@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import Loading from "../Loading/Loading";
 import getBoardData from "../../Service/BoardData";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import { toast, Bounce } from "react-toastify";
 import { useRef } from "react";
 function Dashboard() {
   const [dashboardData, setdashboardData] = useState([{}]);

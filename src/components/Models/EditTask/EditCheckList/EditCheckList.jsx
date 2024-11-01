@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import style from "./EditCheckList.module.css";
 
-const EditCheckList = ({ handleEditCheckList, checkList}) => {
+const EditCheckList = ({ handleEditCheckList, checkList }) => {
   const [EditCheckList, setEditCheckList] = useState([]);
   const prevEditCheckListRef = useRef(EditCheckList);
 
-
   useEffect(() => {
     setEditCheckList(checkList);
-  }, [checkList])
- 
+  }, [checkList]);
+
   const handleCheckbox = (id) => {
     setEditCheckList((prevEditCheckList) =>
       prevEditCheckList.map((item) =>
@@ -26,8 +25,6 @@ const EditCheckList = ({ handleEditCheckList, checkList}) => {
     );
   };
 
- 
-
   useEffect(() => {
     if (prevEditCheckListRef.current !== EditCheckList) {
       handleEditCheckList(EditCheckList);
@@ -38,7 +35,8 @@ const EditCheckList = ({ handleEditCheckList, checkList}) => {
   return (
     <div className={style.EditCheckListparentcontainer}>
       <div className={`inter ${style.EditCheckListTxt}`}>
-        EditCheckList (<span>{EditCheckList.filter((i) => i.completed).length}</span>/
+        EditCheckList (
+        <span>{EditCheckList.filter((i) => i.completed).length}</span>/
         <span>{EditCheckList.length}</span>)
         <span className={`${style.mandatoryfield}`}>*</span>
       </div>
@@ -47,8 +45,10 @@ const EditCheckList = ({ handleEditCheckList, checkList}) => {
           <ul className={`flexdc gap1rem`}>
             {EditCheckList.map((item) => (
               <div className="flexdr" key={item.id}>
-                <ul className={`flexdr gap1rem ${style.EditCheckListcontainer}`}>
-                  <li className={style.checkbox}>
+                <ul
+                  className={`flexdr list_styleNone gap1rem ${style.EditCheckListcontainer}`}
+                >
+                  <li className={` list_styleNone ${style.checkbox}`}>
                     <input
                       className="cp"
                       type="checkbox"
@@ -68,14 +68,12 @@ const EditCheckList = ({ handleEditCheckList, checkList}) => {
                       }
                     />
                   </li>
-                  
                 </ul>
               </div>
             ))}
           </ul>
         </div>
       )}
-      
     </div>
   );
 };

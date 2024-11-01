@@ -11,11 +11,8 @@ import TaskDetails from "./pages/TaskDetails";
 
 function App() {
   const { Login, Register, Dashboard, PageNotFound } = allfiles;
-
-  const token = localStorage.getItem("token");
-  const isAuthenticated = !!token;
- console.log("is",isAuthenticated);
- 
+  
+  
   return (
     <BrowserRouter>
       <div>
@@ -23,13 +20,12 @@ function App() {
 
         <Routes>
         <Route path="/dashboard/getTask" element={<TaskDetails />} />
-          <Route  path="/" element={ isAuthenticated?(<Navigate to="/dashboard/board" />):(<Navigate to="/login" />)} />
+          <Route  path="/" element ={<Login/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route
-            path="/dashboard"
-            element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
-          >
+            path="/dashboard" element= {<Dashboard/>} >
+        
             <Route index element={<Board />} />
             <Route path="board" element={<Board />} />
             <Route path="settings" element={<Setting />} />

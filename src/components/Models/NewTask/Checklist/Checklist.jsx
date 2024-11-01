@@ -52,11 +52,11 @@ const Checklist = ({ onUpdateChecklist }) => {
         <div className={style.overflowy}>
           <ul className={`flexdc gap1rem`}>
             {checklist.map((item) => (
-              <div className="flexdr" key={item.id}>
+              <div className="flexdr open-sans" key={item.id}>
                 <ul className={`flexdr gap1rem ${style.checklistcontainer}`}>
                   <li className={style.checkbox}>
                     <input
-                      className="cp"
+                      className={`cp`}
                       type="checkbox"
                       onChange={() => handleCheckbox(item.id)}
                       checked={item.completed}

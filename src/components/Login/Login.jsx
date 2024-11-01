@@ -67,10 +67,7 @@ function Login() {
       } else if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
         toast.success(response.data.message, { autoClose: 1200 });
-        setTimeout(() => {
-          console.log("i am workfing");
-          navigate("/dashboard/board");
-        }, 2500);
+        navigate("/dashboard/board");
       } else if (response.status === 500) {
         toast.error("Internal server error");
       } else if (response.status === 404) {
@@ -97,7 +94,7 @@ function Login() {
         <form className={`${style.Loginform}`} onSubmit={handleSubmit}>
           <div>
             <img src={emailImg} alt="email png" />
-            <input
+            <input className={`${style.inputField}`}
               type="email"
               name="email"
               onChange={handleInputChange}
@@ -109,7 +106,7 @@ function Login() {
           {errors.email && <p className={style.errorMsg}>{errors.email}</p>}
           <div>
             <img src={passwordImg} alt="password png" />
-            <input
+            <input className={`${style.inputField}`}
               type={visiblePass.password.type}
               name="password"
               onChange={handleInputChange}

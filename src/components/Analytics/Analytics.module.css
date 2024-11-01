@@ -1,0 +1,46 @@
+.analyticsContainer {
+  margin: 0rem 2rem;
+  margin-top: 1rem;
+  font-family: var(--open-sans);
+}
+
+.heading {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 29.96px;
+  text-align: left;
+}
+
+.textname {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24.51px;
+  text-align: left;
+}
+.taskContainer {
+  width: 475px;
+  height: 264px;
+  background: #f9fcff;
+padding: 15px 25px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.marginTop{
+    margin-top: 2rem;
+}
+
+.dot{
+    background-color: #90C4CC;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+}
+.AnalyticsResult{
+font-size: 20px;
+font-weight: 600;
+line-height: 27.24px;
+
+color: #000000;
+}

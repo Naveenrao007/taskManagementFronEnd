@@ -9,55 +9,49 @@ import { useOutletContext } from "react-router-dom";
 import TaskCard from "../TaskCard/TaskCard";
 function Todo() {
   const [isOpenNewTask, setisOpenNewTask] = useState(false);
-  const [tododData, settodoData] = useState([])
-  const { dashboardData } = useOutletContext();
+  const [tododData, settodoData] = useState([]);
+  const { dashboardData, updateDashboardData } = useOutletContext();
   const [closeAllChecklists, setCloseAllChecklists] = useState(false);
 
-  const closeModel= ()=>{
-    setisOpenNewTask(false)
-  }
-  const handleCollapseClick = () => {
-    setCloseAllChecklists((prev) => !prev); 
+  const closeModel = () => {
+    setisOpenNewTask(false);
   };
-  useEffect(()=>{
-    settodoData(dashboardData.dashboard?.Todo)
-  },[dashboardData])
-  const handleNewTask = async(taskData) => {
+  const handleCollapseClick = () => {
+    setCloseAllChecklists((prev) => !prev);
+  };
+  useEffect(() => {
+    settodoData(dashboardData.dashboard?.Todo);
+  }, [dashboardData, tododData]);
+  const handleNewTask = async (taskData) => {
     const response = await createNewtask(taskData);
-      if (response.status === 400) { 
+    if (response.status === 400) {
       toast.error(response.error.message, {
         autoClose: 1000,
-        transition:Bounce
-      
+        transition: Bounce,
       });
       setTimeout(() => {
-        closeModel()
-
+        closeModel();
         window.location.href = "/login";
-      }, 1200);//1800
+      }, 1200);
     } else if (response.status === 201) {
+      updateDashboardData(response.data.data)
+      closeModel();
       toast.success(response.data.message, {
-      
         autoClose: 2000,
-       
       });
-
-      
+      closeModel();
     } else if (response.status === 500) {
       toast.error("Internal server error", {
         autoClose: 5000,
-              });
+      });
     } else if (response.status === 404) {
       toast.error("Url is incorrect", {
         autoClose: 5000,
-       
       });
     }
   };
   return (
     <div className="">
-     
-
       <div className="flexdc">
         <div className="flexdr jcsb">
           <div>Todo</div>
@@ -69,12 +63,16 @@ function Todo() {
               <img className="cp" src={createSign} alt="" />
             </div>
             <div className="cp" onClick={handleCollapseClick}>
-              <img src={collapse} alt="collapseSvg"  />
+              <img src={collapse} alt="collapseSvg" />
             </div>
           </div>
         </div>
-        <div className={`overflowY ${style.gap}`} >
-          <TaskCard taskData = {tododData} fromArray="Todo" closeAllChecklists={closeAllChecklists}/>
+        <div className={`overflowY ${style.gap}`}>
+          <TaskCard
+            taskData={tododData}
+            fromArray="Todo"
+            closeAllChecklists={closeAllChecklists}
+          />
         </div>
       </div>
       <NewTask

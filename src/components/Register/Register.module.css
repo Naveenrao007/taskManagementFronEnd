@@ -22,7 +22,6 @@
   width: 40vw;
   display: flex;
   flex-direction: column;
-  /* text-align: center; */
   justify-content: center;
 }
 
@@ -39,15 +38,13 @@ form {
   width: 80%;
   margin: 0px auto;
 }
-.regDiv{
-  
-    display: flex;
-    align-items: center;
-    border: 1.38px solid #d0d0d0;
-    margin-top: 1vh;
-    border-radius: 8px;
-    padding: 4px 0px;
-  
+.regDiv {
+  display: flex;
+  align-items: center;
+  border: 1.38px solid #d0d0d0;
+  margin-top: 1vh;
+  border-radius: 8px;
+  padding: 4px 0px;
 }
 
 form > div > img {
@@ -62,47 +59,56 @@ form > div > img {
   line-height: 28px;
 }
 .btnCssLogin {
-  border: 1px solid #17A2B8;
+  border: 1px solid #17a2b8;
   background-color: #fff;
-  color: #17A2B8;
+  color: #17a2b8;
   font-weight: 400;
   font-size: 19px;
   line-height: 28px;
-  
 }
-.text{
-   
-    color: #828282;
-    text-align: center;
-    margin: 2.5vh 0vh;
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 28px;
+.text {
+  color: #828282;
+  text-align: center;
+  margin: 2.5vh 0vh;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 28px;
 }
-.m_auto{
-    width: 80%;
-    margin: 0px auto; 
+.m_auto {
+  width: 80%;
+  margin: 0px auto;
 }
 
-.regbtn{
-    color: #FFFFFF;
+.regbtn {
+  color: #ffffff;
 }
-.regheading{
-    color: #343434;
-    font-weight: 600;
-    font-size: 33px;
-    line-height: 45px;
-    text-align: center;
-    margin-bottom: 3rem;
+.regheading {
+  color: #343434;
+  font-weight: 600;
+  font-size: 33px;
+  line-height: 45px;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 .errorMsg {
-    color: red;
-    font-size: 16px;
-    margin-top: 0.35rem;
-  }
-  
-.strongPass{
-    color: green;
-    font-size: 18px;
-}  
+  color: red;
+  font-size: 16px;
+  margin-top: 0.35rem;
+}
 
+.strongPass {
+  color: green;
+  font-size: 18px;
+}
+
+.inputField {
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 19px;
+  line-height: 26px;
+  color: #828282;
+  font-weight: 500;
+  padding: 8px 12px;
+  font-family: var(--open-sans);
+}

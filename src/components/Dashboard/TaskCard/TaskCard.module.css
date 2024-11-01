@@ -110,6 +110,31 @@
   max-height: 500px;
   opacity: 1;
 }
-.hidden{
+.hidden {
   display: none;
+}
+
+.lowcolor {
+  background-color: #63c05b;
+  width: 9px;
+  height: 9px;
+}
+.midcolor {
+  background-color: #18b0ff;
+  width: 9px;
+  height: 9px;
+}
+.highcolor {
+  background-color: #ff2473;
+  width: 9px;
+  height: 9px;
+}
+.checklistdivborder {
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  margin-top: 0.3rem ;
+  padding: 0px 10px;
+  display: flex;
+  gap: 1rem;
+  text-wrap: wrap;
 }

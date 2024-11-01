@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import style from "./Settings.module.css";
-import image1 from "../../assets/Images/image1.png";
 import userImg from "../../assets/Icons/user.jpg";
 import emailImg from "../../assets/Icons/email.png";
 import openEyeImg from "../../assets/Icons/eye.png";
@@ -9,19 +8,24 @@ import passwordImg from "../../assets/Icons/password.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useOutletContext } from "react-router-dom";
+import getBoardData from "../../Service/BoardData"
 import { updateUser } from "../../Service/Auth";
+
 function Settings() {
+  const { dashboardData, updateDashboardData } = useOutletContext();
+
   const navigate = useNavigate();
   const [visiblePass, setVisiblePass] = useState({
-    password: { type: "password", sourceImg: closedEyeImg },
-    confirmPassword: { type: "password", sourceImg: closedEyeImg },
+    oldPassword: { type: "password", sourceImg: closedEyeImg },
+    newPassword: { type: "password", sourceImg: closedEyeImg },
   });
 
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
-    confirmPassword: "",
+    oldPassword: "",
+    newPassword: "",
     common: "",
   });
   const [errors, setErrors] = useState({});
@@ -51,18 +55,28 @@ function Settings() {
     let count = 0;
     if (formData.name) count++;
     if (formData.email) count++;
-    if (formData.password) count++;
+    if (formData.oldPassword) count++;
     if (count > 1) {
       errors.common = "You can update one thing at a time.";
-    } else if (!formData.name && !formData.email && !formData.password) {
+    } else if (!formData.name && !formData.email && !formData.oldPassword) {
       errors.common = "Atleast one filed required.";
     }
 
     if (!/^[A-Za-z]/.test(formData.name) && formData.name) {
       errors.name = "Name must be start with a letter.";
     }
-    if (count === 1 && formData.password && !formData.confirmPassword) {
-      errors.confirmPassword = "Enter confirm Password";
+    
+    if (count === 1 && formData.oldPassword && !formData.newPassword) {
+      errors.newPassword = "Enter new Password";
+    }
+    if (
+      count === 1 &&
+      formData.oldPassword &&
+      formData.newPassword &&
+      formData.oldPassword === formData.newPassword
+    ) {
+      errors.newPassword =
+        "New password must be different from the old password.";
     }
     return errors;
   };
@@ -73,7 +87,6 @@ function Settings() {
       setErrors({});
       const response = await updateUser(formData);
       if (response.status === 400) {
-        console.log("tree".response);
         console.log("message", response.error.message);
         toast.error(response.error.message, {
           autoClose: 1400,
@@ -83,6 +96,13 @@ function Settings() {
         }, 1900);
       } else if (response.status === 201) {
         toast.success(response.data.message, {
+          autoClose: 5000,
+        });
+       const  updatedData =  await  getBoardData()
+
+       updateDashboardData(updatedData.data.data)
+      }else if(response.status === 401){
+        toast.error(response.error.message, {
           autoClose: 5000,
         });
       } else if (response.status === 500) {
@@ -102,9 +122,9 @@ function Settings() {
   return (
     <div className={style.container}>
       <div className={`open-sans ${style.rightSide}`}>
-        <h1 className={` ${style.m_auto} ${style.regheading}`}>Register</h1>
+        <h1 className={` ${style.m_auto} ${style.regheading}`}>Setttings</h1>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className={style.inputContainer}>
             <img src={userImg} alt="user png" />
             <input
               type="text"
@@ -115,58 +135,58 @@ function Settings() {
             />
           </div>
           {errors.name && <p className={style.errorMsg}>{errors.name}</p>}
-          <div>
+          <div className={style.inputContainer}>
             <img src={emailImg} alt="email png" />
             <input
               type="email"
               name="email"
               onChange={handleInputChange}
               value={formData.email}
-              placeholder="Email"
+              placeholder=" Updated Email"
             />
           </div>
 
           {errors.email && <p className={style.errorMsg}>{errors.email}</p>}
-          <div>
+          <div className={style.inputContainer}>
             <img src={passwordImg} alt="password png" />
             <input
-              type={visiblePass.password.type}
-              name="password"
+              type={visiblePass.oldPassword.type}
+              name="oldPassword"
               onChange={handleInputChange}
-              value={formData.password}
-              placeholder="Password"
+              value={formData.oldPassword}
+              placeholder=" Old Password"
             />
             <img
               className="cp"
-              src={visiblePass.password.sourceImg}
+              src={visiblePass.oldPassword.sourceImg}
               alt=" toggle eye png"
-              onClick={() => handleTogglePassword("password")}
+              onClick={() => handleTogglePassword("oldPassword")}
             />
           </div>
 
-          {errors.password && (
-            <p className={style.errorMsg}>{errors.password}</p>
+          {errors.oldPassword && (
+            <p className={style.errorMsg}>{errors.oldPassword}</p>
           )}
 
-          <div>
-            <img src={passwordImg} alt="confirm password png" />
+          <div className={style.inputContainer}>
+            <img src={passwordImg} alt="new password png" />
             <input
-              type={visiblePass.confirmPassword.type}
-              placeholder="Confirm Password"
+              type={visiblePass.newPassword.type}
+              placeholder="New Password"
               onChange={handleInputChange}
-              name="confirmPassword"
-              value={formData.confirmPassword}
+              name="newPassword"
+              value={formData.newPassword}
             />
             <img
               className="cp"
-              src={visiblePass.confirmPassword.sourceImg}
+              src={visiblePass.newPassword.sourceImg}
               alt="toggle eye svg"
-              onClick={() => handleTogglePassword("confirmPassword")}
+              onClick={() => handleTogglePassword("newPassword")}
             />
           </div>
 
-          {errors.confirmPassword && (
-            <p className={style.errorMsg}>{errors.confirmPassword}</p>
+          {errors.newPassword && (
+            <p className={style.errorMsg}>{errors.newPassword}</p>
           )}
           {errors.common && <p className={style.errorMsg}>{errors.common}</p>}
           <button

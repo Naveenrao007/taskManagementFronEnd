@@ -133,7 +133,7 @@ function Register() {
         <form onSubmit={handleSubmit}>
           <div className={style.regDiv}>
             <img src={userImg} alt="user png" />
-            <input
+            <input className={`${style.inputField}`}
               type="text"
               name="name"
               onChange={handleInputChange}
@@ -145,7 +145,7 @@ function Register() {
           {errors.name && <p className={style.errorMsg}>{errors.name}</p>}
           <div className={style.regDiv}>
             <img src={emailImg} alt="email png" />
-            <input
+            <input className={`${style.inputField}`}
               type="email"
               name="email"
               onChange={handleInputChange}
@@ -157,7 +157,7 @@ function Register() {
           {errors.email && <p className={style.errorMsg}>{errors.email}</p>}
           <div className={style.regDiv}>
             <img src={passwordImg} alt="password png" />
-            <input
+            <input className={`${style.inputField}`}
               type={visiblePass.password.type}
               name="password"
               autoComplete={false}
@@ -179,7 +179,7 @@ function Register() {
 
           <div className={style.regDiv}>
             <img src={passwordImg} alt="confirm password png" />
-            <input
+            <input className={`${style.inputField}`}
               type={visiblePass.confirmPassword.type}
               placeholder="Confirm Password"
               onChange={handleInputChange}

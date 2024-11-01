@@ -149,7 +149,7 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
           <div className={`${style.subcontainer}`} key={item._id}>
             <div className="flexdr jcsb">
               <div className={`flexdr alignItmC ${style.prioritydiv}`}>
-                <p className={`${style.Prioritydot}`}>.</p>
+                <p className={`${style.Prioritydot} ${item.priority ==="high"?style.highcolor:(item.priority==="mid"?style.midcolor:style.lowcolor)}`}>.</p>
                 <p>{priorityObj[item.priority]}</p>
               </div>
               <div
@@ -216,7 +216,7 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
               >
                 {Array.isArray(item.checkList) ? (
                   item.checkList.map((checkList) => (
-                    <div className={`flexdr`} key={checkList.id}>
+                    <div className={`flexdr ${style.checklistdivborder}`} key={checkList.id}>
                       <input type="checkbox" id={checkList.id} />
                       <p>{checkList.title}</p>
                     </div>

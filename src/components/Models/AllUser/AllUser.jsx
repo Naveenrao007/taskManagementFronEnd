@@ -6,7 +6,7 @@ const AllUsesr = ({ onAssignUser }) => {
   const [allEmails, setAllEmails] = useState([]);
   const [filteredEmails, setFilteredEmails] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false); // Add showDropdown state
+  const [showDropdown, setShowDropdown] = useState(false); 
 
   useEffect(() => {
     const fetchEmails = async () => {
@@ -31,13 +31,13 @@ const AllUsesr = ({ onAssignUser }) => {
         email.toLowerCase().includes(value.toLowerCase())
       )
     );
-    setShowDropdown(true); // Show dropdown when search term is updated
+    setShowDropdown(true);
   };
 
   const handleSelectEmail = (email) => {
     setSearchTerm(email);
-    setShowDropdown(false); // Hide dropdown after selection
-    onAssignUser(email); // Notify parent component of selected email
+    setShowDropdown(false); 
+    onAssignUser(email); 
   };
 
   return (
