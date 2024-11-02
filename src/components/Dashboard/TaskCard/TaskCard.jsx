@@ -4,6 +4,7 @@ import threeDot from "../../../assets/Icons/threedot.png";
 import arrowDown from "../../../assets/Icons/arrowDown.png";
 import Elipsis from "../../../helper/Ellipsis";
 import { formatDate } from "../../../utils/Index";
+import getBoardData from "../../../Service/BoardData"
 import {
   manageTaskStatus,
   deleteTask,
@@ -21,7 +22,6 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
   const [taskDetails, setTaskDetails] = useState([]);
   const [openChecklistIds, setOpenChecklistIds] = useState([]);
   const { dashboardData, updateDashboardData } = useOutletContext();
-
 
   const priorityObj = {
     high: "HIGH PRIORITY",
@@ -100,6 +100,7 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
 
   const openEditModel = (item) => {
     setIsOpenEditTask(true);
+    console.log("item,", item)
     setTaskDetails(item);
   };
   const handleEditTask = async (taskData) => {
@@ -112,7 +113,11 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
     try {
       const res = await UpdateTask(data);
       if (res.status === 200) {
-        updateDashboardData(res.data.data);
+
+        // updateDashboardData(res.data.data);
+        const boardData = await getBoardData()
+        updateDashboardData(boardData.data.data)
+        
         toast.success("Task updated successfully", { autoClose: 1000 });
         setTimeout(() => {
           setIsOpenEditTask(false);
@@ -125,7 +130,6 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
     }
   };
   const handleShare = async (taskDetails) => {
-
     const data = {
       taskId: taskDetails._id,
       fromArray: fromArray,
