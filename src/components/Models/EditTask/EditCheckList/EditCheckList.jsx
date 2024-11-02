@@ -44,9 +44,9 @@ const EditCheckList = ({ handleEditCheckList, checkList }) => {
         <div className={style.overflowy}>
           <ul className={`flexdc gap1rem`}>
             {EditCheckList.map((item) => (
-              <div className="flexdr" key={item.id}>
+              <div className="flexdr inputBorder" key={item.id}>
                 <ul
-                  className={`flexdr list_styleNone gap1rem ${style.EditCheckListcontainer}`}
+                  className={`flexdr  list_styleNone gap1rem ${style.EditCheckListcontainer}`}
                 >
                   <li className={` list_styleNone ${style.checkbox}`}>
                     <input
@@ -57,7 +57,7 @@ const EditCheckList = ({ handleEditCheckList, checkList }) => {
                       aria-label={`Checkbox for task: ${item.title}`}
                     />
                   </li>
-                  <li className={style.width90per}>
+                  <li className={style.width100per}>
                     <input
                       className={style.taskname}
                       type="text"

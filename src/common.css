@@ -81,6 +81,10 @@
 .alignItmC {
   align-items: center;
 }
+.textStart{
+  text-align: start;
+
+}
 .alignItmFlexStart{
   align-items: flex-start;
 }
@@ -156,4 +160,8 @@
 }
 .gaphalfrem{
   gap: 0.5rem;
+}
+.inputBorder{
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
 }

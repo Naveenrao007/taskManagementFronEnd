@@ -50,7 +50,6 @@
   }
   
   .delete {
-    /* border: 1px solid black; */
     width: 18px;
     height: 18px;
   }
@@ -60,6 +59,7 @@
   .overflowy {
     height: 20vh;
     overflow-y: scroll;
+    width: 104%;
     margin-bottom: 1rem;
     margin-right: 0.2rem;
     padding: 0rem 1rem 0rem 2rem;
@@ -90,14 +90,26 @@
     color: #000000;
     outline: none;
     border: none;
-    width: 1005%;
+    width: 100%;
+    
   }
   .width90per{
       width: 90%;
   }
+  .width100per{
+      width: 100%;
+  }
   .EditCheckListparentcontainer{
     width: 100%;
-  
     padding: 1rem 1.5rem;
   }
   
+  .EditCheckListcontainer{
+    width: 100%;
+    padding: 0.5rem;
+  }
+  .EditCheckListTxt{
+    display: flex;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+  }

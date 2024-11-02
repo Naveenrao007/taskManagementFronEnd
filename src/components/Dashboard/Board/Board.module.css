@@ -5,7 +5,7 @@
 
   height: 82vh;
   overflow-y: hidden;
-  grid-template-columns: 20rem 20rem 20rem 20rem;
+  grid-template-columns:21rem 21rem 21rem 21rem;
   gap: 1.5rem;
   overflow-x: scroll;
   padding: 0.5rem 2rem;

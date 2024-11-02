@@ -9,11 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useOutletContext } from "react-router-dom";
-import getBoardData from "../../Service/BoardData"
+import getBoardData from "../../Service/BoardData";
 import { updateUser } from "../../Service/Auth";
 
 function Settings() {
   const { dashboardData, updateDashboardData } = useOutletContext();
+  console.log(dashboardData);
 
   const navigate = useNavigate();
   const [visiblePass, setVisiblePass] = useState({
@@ -21,12 +22,11 @@ function Settings() {
     newPassword: { type: "password", sourceImg: closedEyeImg },
   });
 
-
-console.log(dashboardData);
+  console.log(dashboardData);
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    name: dashboardData.userName,
+    email: dashboardData.email,
     oldPassword: "",
     newPassword: "",
     common: "",
@@ -68,7 +68,7 @@ console.log(dashboardData);
     if (!/^[A-Za-z]/.test(formData.name) && formData.name) {
       errors.name = "Name must be start with a letter.";
     }
-    
+
     if (count === 1 && formData.oldPassword && !formData.newPassword) {
       errors.newPassword = "Enter new Password";
     }
@@ -101,10 +101,10 @@ console.log(dashboardData);
         toast.success(response.data.message, {
           autoClose: 5000,
         });
-       const  updatedData =  await  getBoardData()
+        const updatedData = await getBoardData();
 
-       updateDashboardData(updatedData.data.data)
-      }else if(response.status === 401){
+        updateDashboardData(updatedData.data.data);
+      } else if (response.status === 401) {
         toast.error(response.error.message, {
           autoClose: 5000,
         });

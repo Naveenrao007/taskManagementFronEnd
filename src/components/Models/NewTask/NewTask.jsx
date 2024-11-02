@@ -4,18 +4,19 @@ import style from "./NewTask.module.css";
 import Checklist from "./Checklist/Checklist";
 import Calendar from "react-calendar";
 import AllUsers from "../AllUser/AllUser";
-
+import "react-calendar/dist/Calendar.css";
 Modal.setAppElement("#root");
+
 const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
   const [taskData, setTaskData] = useState({
     title: "",
     priority: "",
     assignTo: "",
-    dueDate: "",
+    dueDate: null, 
     checklist: [],
   });
   const [errors, setErrors] = useState({});
-  const[openCalander, setOpenCalander] = useState(false);
+  const [openCalendar, setOpenCalendar] = useState(false);
 
   const handleChecklistUpdate = (updatedChecklist) => {
     setTaskData((prev) => ({
@@ -48,21 +49,19 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
   const handleDueDateChange = (date) => {
     setTaskData((prev) => ({
       ...prev,
-      dueDate: date,
+      dueDate:date,
     }));
+    setOpenCalendar(false); 
   };
 
   const validateForm = () => {
     const newErrors = {};
-
     if (!taskData.title.trim()) {
       newErrors.title = "Title is required.";
     }
-
     if (!taskData.priority) {
       newErrors.priority = "Priority is required.";
     }
-
     if (taskData.checklist.length === 0) {
       newErrors.checklist = "At least one checklist item is required.";
     } else {
@@ -74,25 +73,29 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
           return null;
         })
         .filter((error) => error !== null);
-
       if (checklistErrors.length > 0) {
         newErrors.checklist = checklistErrors;
       }
     }
-
     return newErrors;
   };
 
   const handleSave = () => {
     const errors = validateForm();
-
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
       return;
     }
-
     setErrors({});
+
     handleNewTask(taskData);
+    setTaskData({
+      title: "",
+      priority: "",
+      assignTo: "",
+      dueDate: null,
+      checklist: [],
+    });
   };
 
   return (
@@ -198,23 +201,24 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
             <button
               className={`${style.btn_fonts} ${style.btn_select_date}`}
               onClick={() => {
-                setOpenCalander((prev) => !prev);
+                setOpenCalendar((prev) => !prev);
               }}
             >
               {taskData.dueDate
                 ? taskData.dueDate.toDateString()
                 : "Select Due Date"}
             </button>
-            {openCalander && (
-              <div className={`${style.openCalander} ${style.custom_calendar}`}>
+            {openCalendar && (
+              <div className={`${style.openCalendar}`}>
                 <Calendar
+                  className={style.custom_calendar}
                   onChange={handleDueDateChange}
                   value={taskData.dueDate}
-                  minDate={new Date()}
                 />
               </div>
             )}
           </div>
+
           <div className={style.modal_buttons}>
             <button
               onClick={onRequestClose}

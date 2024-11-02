@@ -1,0 +1,206 @@
+.container {
+    font-family: var(--poppins);
+    margin: 1.5rem;
+    
+  }
+  
+  .mainHeading {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+  }
+  
+  .headingContainer {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .taskDetailsContainer {
+    margin: 3rem auto;
+    border: 2px solid #edf5fe;
+    border-radius: 12px;
+    padding: 2rem 1rem 1rem 1.5rem; 
+    width: 40%;
+  }
+  
+  .taskTitle {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 33px;
+    text-align: left;
+    color: #000000;
+  }
+  
+  .taskPriority {
+    font-size: 8px;
+    font-weight: 500;
+    line-height: 12px;
+    text-align: left;
+    color: #707070;
+  }
+  
+  .dot {
+    height: 9px;
+    width: 9px;
+    display: inline-block;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+  }
+  
+  .lowcolor {
+    background-color: #63c05b;
+  }
+  
+  .midcolor {
+    background-color: #18b0ff;
+  }
+  
+  .highcolor {
+    background-color: #ff2473;
+  }
+  
+  .ulContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-right: 0.5rem;
+    max-height: 18rem;
+    overflow-y: auto;
+  }
+  
+  .dueDateContainer {
+    display: flex;
+    margin-top: 1rem;
+    font-family: var(--poppins);
+    gap: 1rem;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    text-align: left;
+    align-items: center;
+  }
+  
+  .date {
+    background: #cf3636;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 4px 8px;
+  }
+  
+  .ul {
+    list-style: none;
+    font-family: var(--inter);
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+    color: #000000;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+  }
+  
+  .ul > li {}
+  
+  @media (max-width: 1024px) {
+    .taskDetailsContainer {
+      width: 60%;
+    }
+  
+    .taskTitle {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .taskDetailsContainer {
+      width: 80%;
+    }
+  
+    .taskTitle {
+      font-size: 18px;
+      line-height: 28px;
+    }
+  
+    .mainHeading,
+    .taskPriority {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  
+    .dot {
+      height: 8px;
+      width: 8px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .taskDetailsContainer {
+      width: 90%;
+      padding: 1.5rem 0.3rem;
+    }
+  
+    .container {
+      margin: 1rem;
+    }
+  
+    .taskTitle {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  
+    .taskPriority,
+    .dueDateContainer {
+      font-size: 12px;
+      line-height: 18px;
+    }
+  
+    .date {
+      padding: 3px 6px;
+    }
+  
+    .ul {
+      padding: 0.4rem 0.8rem;
+    }
+  
+    .mainHeading {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 320px) {
+    .taskDetailsContainer {
+      width: 95%;
+      padding: 1rem 0.2rem;
+    }
+  
+    .container {
+      margin: 0.5rem;
+    }
+  
+    .taskTitle {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  
+    .mainHeading,
+    .taskPriority,
+    .dueDateContainer {
+      font-size: 8px;
+      line-height: 15px;
+    }
+  
+    .date {
+      padding: 2px 5px;
+      font-size: 10px;
+    }
+  
+    .ul {
+      padding: 0.3rem 0.6rem;
+    }
+  }
+  

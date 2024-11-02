@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "./TaskCard.module.css";
 import threeDot from "../../../assets/Icons/threedot.png";
 import arrowDown from "../../../assets/Icons/arrowDown.png";
+import Elipsis from "../../../helper/Ellipsis";
+import { formatDate } from "../../../utils/Index";
 import {
   manageTaskStatus,
   deleteTask,
@@ -19,6 +21,8 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
   const [taskDetails, setTaskDetails] = useState([]);
   const [openChecklistIds, setOpenChecklistIds] = useState([]);
   const { dashboardData, updateDashboardData } = useOutletContext();
+
+  console.log("taskCard", dashboardData);
 
   const priorityObj = {
     high: "HIGH PRIORITY",
@@ -194,12 +198,20 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
               </div>
             </div>
 
-            <div>{item.title}</div>
+            <div className={style.taskTitle}>{Elipsis(item.title, 40)}</div>
 
             <div>
               <div className="flexdr jcsb">
-                <div>
-                  Checklist (<span>{item.checkList.length}</span>)
+                <div className="textStart">
+                  Checklist (
+                  <span>
+                    {
+                      item.checkList.filter(
+                        (checklistItem) => checklistItem.checked
+                      ).length
+                    }
+                  </span>
+                  /<span>{item.checkList.length}</span>)
                 </div>
                 <div className={`cp ${style.dropDownArrow}`}>
                   <img
@@ -217,7 +229,7 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
               </div>
 
               <div
-                className={`${style.dropdownDiv} ${
+                className={` border ${style.dropdownDiv} ${
                   openChecklistIds.includes(item._id)
                     ? style.dropdownDivOpen
                     : ""
@@ -230,7 +242,7 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
                       key={checkList.id}
                     >
                       <input type="checkbox" id={checkList.id} />
-                      <p>{checkList.title}</p>
+                      <p>{Elipsis(checkList.title, 40)}</p>
                     </div>
                   ))
                 ) : (
@@ -244,7 +256,19 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
 
             <div className="flexdr jcsb">
               <div className="flex">
-                <button className={`${style.cardBtn}`}>Feb 10</button>
+                {item.date && (
+                  <button
+                    className={`${
+                      fromArray === "Done"
+                        ? style.cardBtngreen
+                        : new Date(item.date) < new Date()
+                        ? style.cardBtnRed
+                        : style.cardBtn
+                    }`}
+                  >
+                    {formatDate(item.date)}
+                  </button>
+                )}
               </div>
               <div className={`flexdr ${style.gap10px}`}>
                 <button

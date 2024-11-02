@@ -4,6 +4,8 @@ import style from "./EditTask.module.css";
 import EditCheckList from "./EditCheckList/EditCheckList";
 import Calendar from "react-calendar";
 import AllUsers from "../AllUser/AllUser";
+import { formatDate } from "../../../utils/Index";
+import { revertFormattedDate } from "../../../utils/Index";
 
 Modal.setAppElement("#root");
 
@@ -59,10 +61,14 @@ const EditTask = ({
   };
 
   const handleDueDateChange = (date) => {
+    console.log("date", date);
+    console.log("changes", revertFormattedDate(date));
+
     setTaskData((prev) => ({
       ...prev,
-      dueDate: date,
+      dueDate: revertFormattedDate(date),
     }));
+    setCalendarVisible(false);
   };
 
   const validateForm = () => {
@@ -177,7 +183,7 @@ const EditTask = ({
                 <p className={`${style.errorMessage}`}>{errors.priority}</p>
               )}
             </div>
-            <div className={` flexdr jcsb ${style.commonPaddinglr}`}>
+            <div className={`flexdr jcsb ${style.commonPaddinglr}`}>
               <div>Assign To</div>
               <AllUsers onAssignUser={handleAssignToChange} />
             </div>
@@ -210,18 +216,17 @@ const EditTask = ({
           <div className={`${style.datecontainer}`}>
             <button
               className={`${style.btn_fonts} ${style.btn_select_date}`}
-              onClick={() => setCalendarVisible((prev) => !prev)} 
+              onClick={() => setCalendarVisible((prev) => !prev)}
             >
               {taskData.dueDate
-                ? taskData.dueDate.toDateString()
+                ? formatDate(taskData.dueDate)
                 : "Select Due Date"}
             </button>
             {calendarVisible && (
               <div className={`${style.openCalander} ${style.custom_calendar}`}>
                 <Calendar
                   onChange={handleDueDateChange}
-                  value={taskData.dueDate}
-                  minDate={new Date()}
+                  value={(taskData.dueDate)}
                 />
               </div>
             )}
