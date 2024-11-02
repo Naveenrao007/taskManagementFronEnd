@@ -55,12 +55,13 @@ const AllUsesr = ({ onAssignUser }) => {
         <div className={style.dropdownList}>
           {filteredEmails.length > 0 ? (
             filteredEmails.map((email, index) => (
-              <div
+              <div 
                 key={index}
                 onClick={() => handleSelectEmail(email)}
-                className={style.dropdownItem}
-              >
-                {email}
+                className={`flex jcsb ${style.dropdownItem}`}
+              > <p className={`open-sans ${style.userIcon}`}>Ak</p>
+                <p>{email}</p>
+                <p className={style.assignBtn}>Assign</p>
               </div>
             ))
           ) : (
