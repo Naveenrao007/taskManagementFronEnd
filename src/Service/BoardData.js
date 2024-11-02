@@ -1,13 +1,15 @@
-import Dashboard from "../components/Dashboard/Dashboard";
 import { addTokenToHeader } from "../helper/Header";
 import axios from "axios";
-async function getBoardData() {
+async function getBoardData(dateRange= "thisweek") {
 
     try {
         const headers = addTokenToHeader({ headers: {} });
         const res = await axios.get(`${import.meta.env.VITE_BaseUrl}/dashboard/board`, {
-            headers
+            headers,
+            params: { dateRange } 
         });
+        console.log(res);
+        
         return {
             status: res.status,
             data: res.data

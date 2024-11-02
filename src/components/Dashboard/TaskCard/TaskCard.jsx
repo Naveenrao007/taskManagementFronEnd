@@ -22,7 +22,6 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
   const [openChecklistIds, setOpenChecklistIds] = useState([]);
   const { dashboardData, updateDashboardData } = useOutletContext();
 
-  console.log("taskCard", dashboardData);
 
   const priorityObj = {
     high: "HIGH PRIORITY",

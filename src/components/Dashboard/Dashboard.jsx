@@ -15,8 +15,6 @@ function Dashboard() {
   const hasErrorShown = useRef(false);
   const getdata = async () => {
     const res = await getBoardData();
-
-
     if (res.status == 400 && !hasErrorShown.current) {
       toast.error(res.data.message, {
         autoClose: 1800,

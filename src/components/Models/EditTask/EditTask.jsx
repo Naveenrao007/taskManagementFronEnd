@@ -61,7 +61,6 @@ const EditTask = ({
   };
 
   const handleDueDateChange = (date) => {
-    console.log("changes", revertFormattedDate(date));
 
     setTaskData((prev) => ({
       ...prev,

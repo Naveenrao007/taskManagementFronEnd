@@ -90,7 +90,6 @@ function Register() {
           window.location.href = "/login";
         }, 1900);
       } else if (response.status === 201) {
-        console.log(response);
         toast.success(response.data.message, {
           autoClose: 2000,
           

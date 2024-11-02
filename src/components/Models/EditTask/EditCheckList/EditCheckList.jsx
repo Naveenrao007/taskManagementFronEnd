@@ -48,7 +48,6 @@ const EditCheckList = ({ handleEditCheckList, checkList }) => {
                 <ul
                   className={`flexdr  list_styleNone gap1rem ${style.EditCheckListcontainer}`}
                 >
-                  <p>name</p>
                   <li className={` list_styleNone ${style.checkbox}`}>
                     <input
                       className="cp"

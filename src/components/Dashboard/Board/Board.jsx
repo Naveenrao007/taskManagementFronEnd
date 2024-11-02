@@ -7,19 +7,20 @@ import Peopleimg from "../../../assets/Icons/peoples.png";
 import Dropdownimg from "../../../assets/Icons/dropdown.png";
 import Done from "../Done/Done";
 import getTodayDate from "../../../Service/Calander";
-import AddUser from "../../Models/AddUser/AddUser"
+import AddUser from "../../Models/AddUser/AddUser";
 import { useOutletContext } from "react-router-dom";
+import getBoardData from "../../../Service/BoardData";
 
 function Board() {
   const [isOpen, setOpen] = useState(false);
-  const [timePeriod, setTimePeriod] = useState("today");
+  const [timePeriod, setTimePeriod] = useState("thisweek");
   const dropdownRef = useRef(null);
-  const { dashboardData } = useOutletContext();
-  
+  const { dashboardData, updateDashboardData } = useOutletContext();
+
   const timeFilter = {
-    today: "Today",
     thisweek: "This Week",
     thismonth: "This Month",
+    thisyear: "This Year",
   };
   const timePeriodFormatted = timeFilter[timePeriod];
   const handleDropdown = () => {
@@ -42,14 +43,32 @@ function Board() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await getBoardData(timePeriod);
 
+      if (res.status === 400) {
+        toast.error(res.data.message, {
+          autoClose: 1800,
+          transition: Bounce,
+        });
+        setTimeout(() => {
+          window.location.href = "/login";
+        }, 2000);
+      } else if (res.status === 200) {
+        console.log("timePeriod", { timePeriod, res });
 
-  const [isOpenAddUserModal, setisOpenAddUserModal]  = useState(false)
-  const handleAddUser = (e)=>{
+        updateDashboardData(res.data.data);
+      }
+    };
+
+    fetchData();
+  }, [timePeriod]);
+
+  const [isOpenAddUserModal, setisOpenAddUserModal] = useState(false);
+  const handleAddUser = (e) => {
     console.log(e.target.value);
-    
-  }
-
+  };
 
   return (
     <div>
@@ -61,7 +80,10 @@ function Board() {
         <div className="flexdr jcsb">
           <div className="flexdr alignItmC gap1rem">
             <div className={`${style.heading}`}>Board</div>
-            <div className="flexdr gap10px" onClick={() => setisOpenAddUserModal(true)}>
+            <div
+              className="flexdr gap10px"
+              onClick={() => setisOpenAddUserModal(true)}
+            >
               <div>
                 <img src={Peopleimg} alt="" />
               </div>
@@ -81,15 +103,6 @@ function Board() {
                   <li
                     className={`cp ${style.listOption}`}
                     onClick={() => {
-                      setTimePeriod("today");
-                      setOpen(false);
-                    }}
-                  >
-                    Today
-                  </li>
-                  <li
-                    className={`cp ${style.listOption}`}
-                    onClick={() => {
                       setTimePeriod("thisweek");
                       setOpen(false);
                     }}
@@ -104,6 +117,15 @@ function Board() {
                     }}
                   >
                     This month
+                  </li>
+                  <li
+                    className={`cp ${style.listOption}`}
+                    onClick={() => {
+                      setTimePeriod("thisyear");
+                      setOpen(false);
+                    }}
+                  >
+                    This Year
                   </li>
                 </ul>
               </div>
@@ -131,7 +153,6 @@ function Board() {
         onRequestClose={() => setisOpenAddUserModal(false)}
         handleAddUser={handleAddUser}
       />
-      
     </div>
   );
 }
