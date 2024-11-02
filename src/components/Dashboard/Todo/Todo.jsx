@@ -6,6 +6,7 @@ import NewTask from "../../Models/NewTask/NewTask";
 import { createNewtask } from "../../../Service/Newtask";
 import { toast, Bounce } from "react-toastify";
 import { useOutletContext } from "react-router-dom";
+import getBoardData from "../../../Service/BoardData"
 import TaskCard from "../TaskCard/TaskCard";
 function Todo() {
   const [isOpenNewTask, setisOpenNewTask] = useState(false);
@@ -34,7 +35,8 @@ function Todo() {
         window.location.href = "/login";
       }, 1200);
     } else if (response.status === 201) {
-      updateDashboardData(response.data.data)
+       const boardData = await getBoardData()
+      updateDashboardData(boardData.data.data)
       closeModel();
       toast.success(response.data.message, {
         autoClose: 2000,
