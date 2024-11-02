@@ -52,7 +52,7 @@ const AllUsesr = ({ onAssignUser }) => {
       />
 
       {showDropdown && (
-        <div className={style.dropdownList}>
+        <div className={`open-sans ${style.dropdownList}`}>
           {filteredEmails.length > 0 ? (
             filteredEmails.map((email, index) => (
               <div 
