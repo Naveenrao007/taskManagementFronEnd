@@ -214,7 +214,7 @@ const NewTask = ({ isOpenNewTask, onRequestClose, handleNewTask }) => {
                   className={style.custom_calendar}
                   onChange={handleDueDateChange}
                   value={taskData.dueDate}
-                />
+                    />
               </div>
             )}
           </div>

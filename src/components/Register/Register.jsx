@@ -38,7 +38,6 @@ function Register() {
     }));
   };
   const handleInputChange = (event) => {
-    console.log(event.target);
 
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));

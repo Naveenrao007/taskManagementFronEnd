@@ -14,7 +14,6 @@ import { updateUser } from "../../Service/Auth";
 
 function Settings() {
   const { dashboardData, updateDashboardData } = useOutletContext();
-  console.log(dashboardData);
 
   const navigate = useNavigate();
   const [visiblePass, setVisiblePass] = useState({
@@ -22,7 +21,6 @@ function Settings() {
     newPassword: { type: "password", sourceImg: closedEyeImg },
   });
 
-  console.log(dashboardData);
 
   const [formData, setFormData] = useState({
     name: dashboardData.userName,
@@ -46,15 +44,13 @@ function Settings() {
     }));
   };
   const handleInputChange = (event) => {
-    console.log(event.target);
 
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
   const validate = () => {
     const errors = {};
-    console.log(formData);
-    console.log(errors);
+  
     let count = 0;
     if (formData.name) count++;
     if (formData.email) count++;
@@ -90,7 +86,6 @@ function Settings() {
       setErrors({});
       const response = await updateUser(formData);
       if (response.status === 400) {
-        console.log("message", response.error.message);
         toast.error(response.error.message, {
           autoClose: 1400,
         });

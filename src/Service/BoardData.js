@@ -5,7 +5,6 @@ async function getBoardData() {
 
     try {
         const headers = addTokenToHeader({ headers: {} });
-        console.log("Base URL:", import.meta.env.VITE_BaseUrl + "/dashboard/board");
         const res = await axios.get(`${import.meta.env.VITE_BaseUrl}/dashboard/board`, {
             headers
         });

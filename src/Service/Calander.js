@@ -41,7 +41,6 @@ const getTodayDate = () => {
     const date = currentDate.getDate();
 
     const formattedDate = formateDate(date) + " " + months[month] + ", " + year;
-    console.log(formattedDate);
 
     return formattedDate;
 };

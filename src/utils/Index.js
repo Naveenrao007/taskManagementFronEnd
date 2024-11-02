@@ -12,10 +12,6 @@ function formatDate(dateString) {
 }
 
 function revertFormattedDate(formattedDate) {
-    console.log("revertFormattedDate",formattedDate);
-    
-   
-
     const dateParts = String(formattedDate).split(' GMT')[0];
     const date = new Date(dateParts);
 

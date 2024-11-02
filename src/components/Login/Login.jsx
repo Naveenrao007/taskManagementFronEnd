@@ -34,7 +34,6 @@ function Login() {
     }));
   };
   const handleInputChange = (event) => {
-    console.log(event.target);
 
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
@@ -59,7 +58,6 @@ function Login() {
     if (Object.keys(errors).length === 0) {
       setErrors({});
       const response = await login(formData);
-      console.log(response);
       if (response.status === 400) {
         toast.error(response.error.message, {
           autoClose: 1400,

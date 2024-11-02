@@ -15,7 +15,6 @@ function Board() {
   const [timePeriod, setTimePeriod] = useState("today");
   const dropdownRef = useRef(null);
   const { dashboardData } = useOutletContext();
-  console.log(dashboardData);
   
   const timeFilter = {
     today: "Today",

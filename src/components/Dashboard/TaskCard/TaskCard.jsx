@@ -126,7 +126,6 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
     }
   };
   const handleShare = async (taskDetails) => {
-    console.log("Share task:", taskDetails);
 
     const data = {
       taskId: taskDetails._id,

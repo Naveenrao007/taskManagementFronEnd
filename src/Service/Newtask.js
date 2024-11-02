@@ -59,9 +59,7 @@ const UpdateTask = async (data) => {
 
 
 const deleteTask = async (data) => {
-    console.log("api", data);
     const headers = addTokenToHeader({ headers: {} })
-    console.log("jrsgfdg00", headers);
     
     try {
         const res = await axios.delete(`${import.meta.env.VITE_BaseUrl}/dashboard/deleteTask`,  {

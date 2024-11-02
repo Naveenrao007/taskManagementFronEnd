@@ -15,8 +15,7 @@ function Dashboard() {
   const hasErrorShown = useRef(false);
   const getdata = async () => {
     const res = await getBoardData();
-    console.log("data",res.status);
-    console.log("data", res.data);
+
 
     if (res.status == 400 && !hasErrorShown.current) {
       toast.error(res.data.message, {
@@ -29,7 +28,6 @@ function Dashboard() {
       hasErrorShown.current = true;
     } else if (res.status == 200) {
       setIsLoading(false);
-      console.log("ffff",res.data.data);
       setdashboardData(res.data.data)
       
     }
@@ -39,7 +37,6 @@ function Dashboard() {
     getdata();
   }, []);
   const updateDashboardData = (newData) => {
-    console.log(newData);
     
     setdashboardData(newData);
   };

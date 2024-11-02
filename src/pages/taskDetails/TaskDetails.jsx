@@ -26,7 +26,6 @@ const TaskDetails = () => {
   const searchParams = new URLSearchParams(location.search);
   const taskId = searchParams.get("taskId");
   const fromArray = searchParams.get("fromArray");
-  console.log("taskdata", taskData);
 
   useEffect(() => {
     const fetchTaskData = async () => {
