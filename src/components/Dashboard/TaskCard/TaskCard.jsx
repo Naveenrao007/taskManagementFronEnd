@@ -4,7 +4,7 @@ import threeDot from "../../../assets/Icons/threedot.png";
 import arrowDown from "../../../assets/Icons/arrowDown.png";
 import Elipsis from "../../../helper/Ellipsis";
 import { formatDate } from "../../../utils/Index";
-import getBoardData from "../../../Service/BoardData"
+import getBoardData from "../../../Service/BoardData";
 import {
   manageTaskStatus,
   deleteTask,
@@ -100,7 +100,7 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
 
   const openEditModel = (item) => {
     setIsOpenEditTask(true);
-    console.log("item,", item)
+    console.log("item,", item);
     setTaskDetails(item);
   };
   const handleEditTask = async (taskData) => {
@@ -113,11 +113,9 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
     try {
       const res = await UpdateTask(data);
       if (res.status === 200) {
+        const boardData = await getBoardData();
+        updateDashboardData(boardData.data.data);
 
-        // updateDashboardData(res.data.data);
-        const boardData = await getBoardData()
-        updateDashboardData(boardData.data.data)
-        
         toast.success("Task updated successfully", { autoClose: 1000 });
         setTimeout(() => {
           setIsOpenEditTask(false);
@@ -263,7 +261,8 @@ function TaskCard({ taskData, fromArray, closeAllChecklists }) {
                     className={`${
                       fromArray === "Done"
                         ? style.cardBtngreen
-                        : new Date(item.date) < new Date()
+                        : new Date(item.date).toDateString() <
+                          new Date().toDateString()
                         ? style.cardBtnRed
                         : style.cardBtn
                     }`}
