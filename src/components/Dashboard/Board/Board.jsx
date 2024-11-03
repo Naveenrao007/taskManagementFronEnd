@@ -10,13 +10,14 @@ import getTodayDate from "../../../Service/Calander";
 import AddUser from "../../Models/AddUser/AddUser";
 import { useOutletContext } from "react-router-dom";
 import getBoardData from "../../../Service/BoardData";
+import Loading from "../../Loading/Loading";
 
 function Board() {
   const [isOpen, setOpen] = useState(false);
   const [timePeriod, setTimePeriod] = useState("thisweek");
   const dropdownRef = useRef(null);
   const { dashboardData, updateDashboardData } = useOutletContext();
-
+  const [isLoading, setIsLoading] = useState(true);
   const timeFilter = {
     thisweek: "This Week",
     thismonth: "This Month",
@@ -45,6 +46,7 @@ function Board() {
   }, [isOpen]);
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const res = await getBoardData(timePeriod);
 
       if (res.status === 400) {
@@ -56,9 +58,8 @@ function Board() {
           window.location.href = "/login";
         }, 2000);
       } else if (res.status === 200) {
-        console.log("timePeriod", { timePeriod, res });
-
         updateDashboardData(res.data.data);
+        setIsLoading(false);
       }
     };
 
@@ -70,7 +71,9 @@ function Board() {
     console.log(e.target.value);
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div>
       <header className={`${style.boardheader}`}>
         <div className="flexdr jcsb">
@@ -92,7 +95,7 @@ function Board() {
           </div>
           <div className="">
             <div className="flexdr cp gap1rem" onClick={handleDropdown}>
-              <p>{timePeriodFormatted}</p>
+              <p className={style.timePeriod}>{timePeriodFormatted}</p>
               <div>
                 <img src={Dropdownimg} alt="dropdownImg" />
               </div>

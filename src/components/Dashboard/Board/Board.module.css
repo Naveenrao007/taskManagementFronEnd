@@ -83,3 +83,11 @@
 .listOption:hover {
   background-color: #cfcbcb;
 }
+.timePeriod{
+  font-family: var(--poppins);
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+text-align: center;
+
+}
