@@ -8,7 +8,9 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  min-height: 100vh;
 }
+
 .leftSide {
   width: 60vw;
   background-color: #17a2b8;
@@ -17,13 +19,15 @@
   text-align: center;
   justify-content: center;
   height: 100vh;
+  padding: 2rem;
 }
+
 .rightSide {
   width: 40vw;
   display: flex;
   flex-direction: column;
-  /* text-align: center; */
   justify-content: center;
+  padding: 2rem;
 }
 
 .input {
@@ -35,13 +39,15 @@
   font-size: 19px;
   line-height: 28px;
 }
+
 form {
   width: 80%;
   margin: 0px auto;
   display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
+
 .Loginform > div {
   display: flex;
   align-items: center;
@@ -49,19 +55,37 @@ form {
   margin-top: 1vh;
   border-radius: 8px;
   padding: 4px 0px;
+  transition: border-color 0.3s ease;
+}
+
+.Loginform > div:focus-within {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(23, 162, 184, 0.1);
 }
 
 .Loginform > div > img {
   margin-left: 0.4vw;
   margin-right: 0.5vw;
 }
+
 .btnCss {
   background-color: #17a2b8;
   border: none;
   font-weight: 400;
   font-size: 19px;
   line-height: 28px;
+  transition: all 0.3s ease;
+  width: 100%;
+  border-radius: 55px;
+  position: relative;
+  overflow: hidden;
 }
+
+.btnCss:hover {
+  background-color: #138496;
+  transform: translateY(-2px);
+}
+
 .btnCssLogin {
   border: 1px solid #17a2b8;
   background-color: #fff;
@@ -69,7 +93,38 @@ form {
   font-weight: 400;
   font-size: 19px;
   line-height: 28px;
+  transition: all 0.3s ease;
+  width: 100%;
+  border-radius: 55px;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Button ripple effect */
+.btnCss::after,
+.btnCssLogin::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  transition: width 0.35s ease, height 0.35s ease, opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.btnCss:active::after,
+.btnCssLogin:active::after {
+  width: 180%;
+  height: 300%;
+  opacity: 0;
+}
+
 .text {
   color: #828282;
   text-align: center;
@@ -78,6 +133,7 @@ form {
   font-size: 19px;
   line-height: 28px;
 }
+
 .m_auto {
   width: 80%;
   margin: 0px auto;
@@ -86,6 +142,7 @@ form {
 .regbtn {
   color: #ffffff;
 }
+
 .regheading {
   color: #343434;
   font-weight: 600;
@@ -94,11 +151,11 @@ form {
   text-align: center;
   margin-bottom: 3rem;
 }
+
 .errorMsg {
   color: red;
   font-size: 18px;
   margin-top: 0.35rem;
-  /* margin-bottom: 0.75rem; */
 }
 
 .strongPass {
@@ -116,5 +173,181 @@ form {
   font-weight: 500;
   padding: 8px 12px;
   font-family: var(--open-sans);
+}
+
+/* hero band and action card */
+.heroBand {
+  display: none;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+.actionsCard {
+  background: #ffffff;
+  border: 1px solid #eaf2f6;
+  border-radius: 16px;
+  padding: 12px 16px 16px;
+  box-shadow: 0 8px 24px rgba(23, 162, 184, 0.06);
+  margin-top: 16px;
+}
+.heroTitle {
+  color: #0f172a;
+  font-weight: 700;
+}
+.heroSubtitle {
+  color: #64748b;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 1024px) {
+  .container { flex-direction: column; }
+  .leftSide { display: none; }
+  .rightSide {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 2rem 16px;
+    background: none;
+    align-items: center;
+    justify-content: center;
+  }
+  form { width: min(100%, 560px); }
+  .m_auto { width: min(100%, 560px); }
+  .rightSide > * { width: min(100%, 560px); }
+  /* Card look only for form, not heading */
+  .rightSide form {
+    background: #ffffff;
+    border: 1px solid #eaf2f6;
+    border-radius: 16px;
+    padding: 18px 18px 20px;
+    box-shadow: 0 12px 28px rgba(23, 162, 184, 0.08);
+    animation: fadeInUp 240ms ease-out;
+  }
+  /* Ensure heading container has no visual styles */
+  .rightSide .m_auto {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .heroBand {
+    display: block;
+    width: min(100%, 560px);
+    background: transparent !important; /* ensure no bg */
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 8px;
+    color: inherit;
+    box-shadow: none !important;
+  }
+  .heroTitle { font-size: 20px; }
+  .heroSubtitle { font-size: 13px; }
+  /* reduce login heading size and ensure no text shadow */
+  .regheading {
+    font-size: 28px;
+    line-height: 36px;
+    text-shadow: none;
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rightSide { padding: 2rem 16px; }
+  .rightSide > * { width: min(100%, 520px); }
+}
+
+@media (max-width: 576px) {
+  .rightSide { padding: 2rem 14px; }
+  .rightSide > * { width: min(100%, 480px); }
+  .heroTitle { font-size: 18px; }
+  .heroSubtitle { font-size: 12px; }
+  .regheading { font-size: 24px; line-height: 32px; }
+}
+
+@media (max-width: 480px) {
+  .rightSide { padding: 2rem 12px; }
+  .rightSide > * { width: min(100%, 440px); }
+  .regheading { font-size: 22px; line-height: 30px; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Size tuning for small screens */
+@media (max-width: 576px) {
+  /* Inputs */
+  .inputField { font-size: 15px; line-height: 22px; padding: 10px 10px; }
+  .Loginform > div { padding: 8px 0; }
+  .Loginform > div > img { width: 18px; height: 18px; margin-left: 8px; margin-right: 8px; }
+  /* Buttons */
+  .btnCss, .btnCssLogin { font-size: 16px; line-height: 22px; padding: 10px 0; }
+  /* Headings */
+  .regheading { font-size: 22px; line-height: 30px; }
+  .heroTitle { font-size: 17px; }
+  .heroSubtitle { font-size: 12px; }
+}
+
+@media (max-width: 375px) {
+  .inputField { font-size: 14px; line-height: 20px; padding: 8px 8px; }
+  .Loginform > div { padding: 6px 0; border-radius: 12px; }
+  .Loginform > div > img { width: 16px; height: 16px; margin-left: 6px; margin-right: 6px; }
+  .btnCss, .btnCssLogin { font-size: 15px; line-height: 20px; padding: 9px 0; }
+  .regheading { font-size: 20px; line-height: 28px; }
+}
+
+/* Dense layout tweaks for small screens */
+@media (max-width: 576px) {
+  /* Reduce form card vertical padding */
+  .rightSide form { padding: 12px 12px 14px !important; }
+  /* Reduce gap between fields */
+  .Loginform > div { margin-top: 6px; }
+  /* Reduce heading spacing */
+  .regheading { margin-bottom: 12px; }
+  /* Reduce actions card padding */
+  .actionsCard { padding: 10px 12px 12px; }
+  /* Reduce button vertical padding and top margin */
+  .rightSide form button { padding: 8px 0; margin-top: 12px; }
+}
+
+@media (max-width: 375px) {
+  .rightSide form { padding: 10px 10px 12px !important; }
+  .Loginform > div { margin-top: 4px; }
+  .actionsCard { padding: 8px 10px 10px; }
+  .rightSide form button { padding: 7px 0; margin-top: 10px; }
+  .regheading { margin-bottom: 10px; }
+}
+
+/* Explicitly reduce input heights on small screens */
+@media (max-width: 576px) {
+  .Loginform > div { height: 44px; }
+  .inputField { height: 100%; padding: 6px 8px; }
+}
+
+@media (max-width: 375px) {
+  .Loginform > div { height: 40px; }
+  .inputField { height: 100%; padding: 4px 6px; }
+}
+
+/* Normalize icon sizes and spacing */
+@media (max-width: 1024px) {
+  .Loginform > div > img { width: 20px; height: 20px; margin-left: 10px; margin-right: 10px; }
+}
+
+@media (max-width: 576px) {
+  .Loginform > div > img { width: 20px; height: 20px; margin-left: 10px; margin-right: 10px; }
+}
+
+@media (max-width: 375px) {
+  .Loginform > div > img { width: 18px; height: 18px; margin-left: 8px; margin-right: 8px; }
 }
 
