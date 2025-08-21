@@ -9,17 +9,37 @@
   overflow-x: scroll;
   padding: 0.5rem 1rem;
 }
+
 .gridcontent {
   background: #EEF2F5;
   padding: 18px 10px;
   border-radius: 10px;
   height: 100%;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
+
+.gridcontent:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
 .boardheader {
   padding: 0px 32px;
   margin-top: 1rem;
 }
+
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -37,6 +57,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #86aabd;
 }
+
 .overflowY {
   height: 71vh;
   overflow-y: scroll;
@@ -44,4 +65,57 @@
 
 .li{
     list-style: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .gridcontainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .boardheader {
+    padding: 0px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridcontainer {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 60vh;
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+  
+  .gridcontent {
+    padding: 12px 8px;
+    min-height: 200px;
+  }
+  
+  .boardheader {
+    padding: 0px 8px;
+    margin-top: 0.5rem;
+  }
+  
+  .mobileOverlay {
+    display: block;
+  }
+}
+
+@media (max-width: 576px) {
+  .gridcontainer {
+    gap: 0.5rem;
+    padding: 0.25rem;
+  }
+  
+  .gridcontent {
+    padding: 8px 6px;
+    min-height: 150px;
+  }
+  
+  .boardheader {
+    padding: 0px 4px;
+  }
 }
