@@ -88,6 +88,14 @@ function Login() {
         </div>
       </div>
       <div className={`open-sans ${style.rightSide}`}>
+        {/* Top hero band for small screens */}
+        <div className={style.heroBand}>
+          <h2 className={style.heroTitle}>Pro Manage</h2>
+          <p className={style.heroSubtitle}>
+            Plan, track and collaborate on your team's tasks with ease.
+          </p>
+        </div>
+
         <h1 className={` ${style.m_auto} ${style.regheading}`}>Login</h1>
         <form className={`${style.Loginform}`} onSubmit={handleSubmit}>
           <div>
@@ -130,7 +138,7 @@ function Login() {
             Login
           </button>
         </form>
-        <div className={style.m_auto}>
+        <div className={`${style.m_auto} ${style.actionsCard}`}>
           <p className={style.text}> don't have an Account ?</p>
           <button
             className={`primary-btn  cp  ${style.btnCssLogin}`}
