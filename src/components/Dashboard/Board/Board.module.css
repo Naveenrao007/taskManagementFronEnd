@@ -1,27 +1,42 @@
+.boardContainer {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .gridcontainer {
   display: grid;
-  width: 82vw;
+  width: 100%;
   font-family: var(--poppins);
-
   height: 82vh;
   overflow-y: hidden;
-  grid-template-columns:21rem 21rem 21rem 21rem;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  overflow-x: scroll;
+  overflow-x: auto;
   padding: 0.5rem 2rem;
 }
+
 .gridcontent {
   background: #eef2f5;
   padding: 18px 10px;
   border-radius: 10px;
   height: 100%;
   overflow: hidden;
+  transition: all 0.3s ease;
+  min-width: 250px;
 }
+
+.gridcontent:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
 .boardheader {
   padding: 0rem 2rem;
   margin-top: 1rem;
   font-family: var(--poppins);
 }
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -39,12 +54,14 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #86aabd;
 }
+
 .date {
   color: #707070;
   font-size: 20px;
   font-weight: 500;
   line-height: 30px;
 }
+
 .name {
   color: #000000;
   font-size: 22px;
@@ -59,15 +76,22 @@
   text-align: left;
 }
 
+.dropdownWrapper {
+  position: relative;
+}
+
 .dropdownContainer {
   font-family: var(--poppins);
   position: absolute;
-  right: 2.5vw;
+  right: 0;
+  top: 100%;
   background-color: #ffffff;
   list-style: none;
   z-index: 2;
   border-radius: 12px;
   box-shadow: 0px 2px 22px 0px #7e7a7a40;
+  min-width: 150px;
+  margin-top: 0.5rem;
 }
 
 .listOption {
@@ -78,16 +102,143 @@
   align-items: center;
   color: #000000;
   margin-bottom: 0.5rem;
+  transition: background-color 0.3s ease;
+  border-radius: 8px;
+  margin: 0.25rem;
 }
 
 .listOption:hover {
   background-color: #cfcbcb;
 }
-.timePeriod{
-  font-family: var(--poppins);
-font-size: 16px;
-font-weight: 400;
-line-height: 24px;
-text-align: center;
 
+.timePeriod {
+  font-family: var(--poppins);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .gridcontainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .boardheader {
+    padding: 0rem 1rem;
+  }
+  
+  .heading {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  
+  .name {
+    font-size: 18px;
+    line-height: 27px;
+  }
+  
+  .date {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridcontainer {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 60vh;
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+  
+  .gridcontent {
+    min-height: 200px;
+    padding: 12px 8px;
+  }
+  
+  .boardheader {
+    padding: 0rem 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .heading {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  
+  .name {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  .date {
+    font-size: 14px;
+    line-height: 21px;
+  }
+  
+  .timePeriod {
+    font-size: 14px;
+    line-height: 21px;
+  }
+  
+  .dropdownContainer {
+    right: -50px;
+    min-width: 120px;
+  }
+  
+  .listOption {
+    font-size: 12px;
+    padding: 0.4rem 1rem 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .gridcontainer {
+    gap: 0.5rem;
+    padding: 0.25rem;
+  }
+  
+  .gridcontent {
+    min-height: 150px;
+    padding: 8px 6px;
+  }
+  
+  .boardheader {
+    padding: 0rem 0.25rem;
+  }
+  
+  .heading {
+    font-size: 18px;
+    line-height: 27px;
+  }
+  
+  .name {
+    font-size: 14px;
+    line-height: 21px;
+  }
+  
+  .date {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  
+  .timePeriod {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  
+  .dropdownContainer {
+    right: -30px;
+    min-width: 100px;
+  }
+  
+  .listOption {
+    font-size: 11px;
+    padding: 0.3rem 0.8rem 0.3rem 0.6rem;
+  }
 }
