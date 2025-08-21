@@ -127,6 +127,12 @@ function Register() {
         </div>
       </div>
       <div className={`open-sans ${style.rightSide}`}>
+        <div className={style.heroBand}>
+          <h2 className={style.heroTitle}>Pro Manage</h2>
+          <p className={style.heroSubtitle}>
+            Create boards, add teammates and deliver work faster.
+          </p>
+        </div>
         <h1 className={` ${style.m_auto} ${style.regheading}`}>Register</h1>
         <form onSubmit={handleSubmit}>
           <div className={style.regDiv}>
@@ -202,7 +208,7 @@ function Register() {
             Register
           </button>
         </form>
-        <div className={style.m_auto}>
+        <div className={`${style.m_auto} ${style.actionsCard}`}>
           <p className={style.text}> Have an Account ?</p>
           <button
             className={`primary-btn  cp  ${style.btnCssLogin}`}
