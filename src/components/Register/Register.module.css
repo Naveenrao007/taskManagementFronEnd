@@ -37,14 +37,24 @@
 form {
   width: 80%;
   margin: 0px auto;
+  display: flex;            /* match login */
+  flex-direction: column;   /* match login */
+  gap: 0.5rem;              /* match login */
 }
+/* Match register fields to login fields */
 .regDiv {
   display: flex;
   align-items: center;
-  border: 1.38px solid #d0d0d0;
-  margin-top: 1vh;
-  border-radius: 8px;
-  padding: 4px 0px;
+  border: 1.38px solid #d0d0d0; /* same as login */
+  margin-top: 1vh;              /* same vertical spacing */
+  border-radius: 8px;           /* same corner radius */
+  padding: 4px 6px;             /* add inner left/right gap like login */
+  transition: border-color 0.3s ease; /* smooth focus */
+}
+
+.regDiv:focus-within {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(23, 162, 184, 0.1); /* same as login */
 }
 
 form > div > img {
@@ -57,6 +67,10 @@ form > div > img {
   font-weight: 400;
   font-size: 19px;
   line-height: 28px;
+  width: 100%;
+  border-radius: 55px;
+  position: relative;
+  overflow: hidden;
 }
 .btnCssLogin {
   border: 1px solid #17a2b8;
@@ -65,7 +79,37 @@ form > div > img {
   font-weight: 400;
   font-size: 19px;
   line-height: 28px;
+  width: 100%;
+  border-radius: 55px;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Button ripple effect */
+.btnCss::after,
+.btnCssLogin::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0;
+  height: 0;
+  background: rgba(23, 162, 184, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  transition: width 0.35s ease, height 0.35s ease, opacity 0.45s ease;
+  pointer-events: none;
+}
+
+.btnCss:active::after,
+.btnCssLogin:active::after {
+  width: 180%;
+  height: 300%;
+  opacity: 0;
+}
+
 .text {
   color: #828282;
   text-align: center;
@@ -101,6 +145,7 @@ form > div > img {
   font-size: 18px;
 }
 
+/* Ensure inputs fill and align like login */
 .inputField {
   width: 100%;
   outline: none;
@@ -109,6 +154,167 @@ form > div > img {
   line-height: 26px;
   color: #828282;
   font-weight: 500;
-  padding: 8px 12px;
+  padding: 8px 12px; /* same padding */
   font-family: var(--open-sans);
+}
+
+/* Responsive: hide left section and expand right on small screens; fluid widths */
+@media (max-width: 1024px) {
+  .container { flex-direction: column; }
+  .leftSide { display: none; }
+  .rightSide {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 2rem 16px;
+    background: none;
+    align-items: center;
+    justify-content: center;
+  }
+  form { width: min(100%, 560px); }
+  .m_auto { width: min(100%, 560px); }
+  .rightSide > * { width: min(100%, 560px); }
+  /* Keep card only on the form */
+  .rightSide form {
+    background: #ffffff;
+    border: 1px solid #eaf2f6;
+    border-radius: 16px;
+    padding: 18px 18px 20px;
+    box-shadow: 0 12px 28px rgba(23, 162, 184, 0.08);
+    animation: fadeInUp 240ms ease-out;
+  }
+  /* Remove visual styles from heading container */
+  .rightSide .m_auto {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .rightSide { padding: 2rem 16px; }
+  .rightSide > * { width: min(100%, 520px); }
+}
+
+@media (max-width: 576px) {
+  .rightSide { padding: 2rem 14px; }
+  .rightSide > * { width: min(100%, 480px); }
+}
+
+@media (max-width: 480px) {
+  .rightSide { padding: 2rem 12px; }
+  .rightSide > * { width: min(100%, 440px); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* hero band and action card */
+.heroBand { 
+  display: none; 
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+.actionsCard {
+  background: #ffffff;
+  border: 1px solid #eaf2f6;
+  border-radius: 16px;
+  padding: 12px 16px 16px;
+  box-shadow: 0 8px 24px rgba(23, 162, 184, 0.06);
+  margin-top: 16px;
+}
+.heroTitle { color: #0f172a; font-weight: 700; }
+.heroSubtitle { color: #64748b; font-size: 14px; margin-top: 4px; }
+
+@media (max-width: 1024px) {
+  .heroBand {
+    display: block;
+    width: min(100%, 560px);
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 8px;
+    color: inherit;
+    box-shadow: none !important;
+  }
+  .heroTitle { font-size: 20px; }
+  .heroSubtitle { font-size: 13px; }
+  .regheading { font-size: 28px; line-height: 36px; margin-bottom: 14px; text-shadow: none; }
+}
+
+@media (max-width: 576px) {
+  .heroTitle { font-size: 18px; }
+  .heroSubtitle { font-size: 12px; }
+  .regheading { font-size: 24px; line-height: 32px; }
+}
+
+@media (max-width: 480px) {
+  .regheading { font-size: 22px; line-height: 30px; }
+}
+
+/* Size tuning for small screens */
+@media (max-width: 576px) {
+  .inputField { font-size: 15px; line-height: 22px; padding: 10px 10px; }
+  .regDiv { padding: 8px 6px; }
+  form > div > img { width: 18px; height: 18px; margin-left: 8px; margin-right: 8px; }
+  .btnCss, .btnCssLogin { font-size: 16px; line-height: 22px; padding: 10px 0; }
+  .regheading { font-size: 22px; line-height: 30px; }
+  .heroTitle { font-size: 17px; }
+  .heroSubtitle { font-size: 12px; }
+}
+
+@media (max-width: 375px) {
+  .inputField { font-size: 14px; line-height: 20px; padding: 8px 8px; }
+  .regDiv { padding: 6px 6px; border-radius: 12px; }
+  form > div > img { width: 16px; height: 16px; margin-left: 6px; margin-right: 6px; }
+  .btnCss, .btnCssLogin { font-size: 15px; line-height: 20px; padding: 9px 0; }
+  .regheading { font-size: 20px; line-height: 28px; }
+}
+
+/* Dense layout tweaks for small screens */
+@media (max-width: 576px) {
+  .rightSide form { padding: 12px 12px 14px !important; }
+  .regDiv { margin-top: 6px; }
+  .regheading { margin-bottom: 12px; }
+  .actionsCard { padding: 10px 12px 12px; }
+  .rightSide form button { padding: 8px 0; margin-top: 12px; }
+}
+
+@media (max-width: 375px) {
+  .rightSide form { padding: 10px 10px 12px !important; }
+  .regDiv { margin-top: 4px; }
+  .actionsCard { padding: 8px 10px 10px; }
+  .rightSide form button { padding: 7px 0; margin-top: 10px; }
+  .regheading { margin-bottom: 10px; }
+}
+
+/* Explicitly reduce input heights on small screens */
+@media (max-width: 576px) {
+  .regDiv { height: 44px; }
+  .inputField { height: 100%; padding: 6px 8px; }
+}
+
+@media (max-width: 375px) {
+  .regDiv { height: 40px; }
+  .inputField { height: 100%; padding: 4px 6px; }
+}
+
+/* Normalize icon sizes and spacing */
+@media (max-width: 1024px) {
+  form > div > img { width: 20px; height: 20px; margin-left: 10px; margin-right: 10px; }
+}
+
+@media (max-width: 576px) {
+  form > div > img { width: 20px; height: 20px; margin-left: 10px; margin-right: 10px; }
+}
+
+@media (max-width: 375px) {
+  form > div > img { width: 18px; height: 18px; margin-left: 8px; margin-right: 8px; }
 }
