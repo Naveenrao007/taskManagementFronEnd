@@ -11,6 +11,7 @@ import AddUser from "../../Models/AddUser/AddUser";
 import { useOutletContext } from "react-router-dom";
 import getBoardData from "../../../Service/BoardData";
 import Loading from "../../Loading/Loading";
+import { toast, Bounce } from "react-toastify";
 
 function Board() {
   const [isOpen, setOpen] = useState(false);
@@ -18,12 +19,14 @@ function Board() {
   const dropdownRef = useRef(null);
   const { dashboardData, updateDashboardData } = useOutletContext();
   const [isLoading, setIsLoading] = useState(true);
+  
   const timeFilter = {
     thisweek: "This Week",
     thismonth: "This Month",
     thisyear: "This Year",
   };
   const timePeriodFormatted = timeFilter[timePeriod];
+  
   const handleDropdown = () => {
     setOpen((prev) => !prev);
   };
@@ -44,6 +47,7 @@ function Board() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
+  
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -74,7 +78,7 @@ function Board() {
   return isLoading ? (
     <Loading />
   ) : (
-    <div>
+    <div className={style.boardContainer}>
       <header className={`${style.boardheader}`}>
         <div className="flexdr jcsb">
           <p className={`${style.name}`}>Welcome! {dashboardData.userName} </p>
@@ -84,20 +88,27 @@ function Board() {
           <div className="flexdr alignItmC gap1rem">
             <div className={`${style.heading}`}>Board</div>
             <div
-              className="flexdr gap10px"
+              className="flexdr gap10px cp"
               onClick={() => setisOpenAddUserModal(true)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  setisOpenAddUserModal(true);
+                }
+              }}
             >
               <div>
-                <img src={Peopleimg} alt="" />
+                <img src={Peopleimg} alt="Add People Icon" />
               </div>
               <p className="font14px fw500 grayColor">Add people</p>
             </div>
           </div>
-          <div className="">
+          <div className={style.dropdownWrapper}>
             <div className="flexdr cp gap1rem" onClick={handleDropdown}>
               <p className={style.timePeriod}>{timePeriodFormatted}</p>
               <div>
-                <img src={Dropdownimg} alt="dropdownImg" />
+                <img src={Dropdownimg} alt="Dropdown Icon" />
               </div>
             </div>
             {isOpen && (
